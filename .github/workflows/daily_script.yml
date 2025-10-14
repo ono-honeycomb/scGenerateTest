@@ -8,6 +8,8 @@ on:
 jobs:
   run_and_commit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # リポジトリへの書き込み権限を許可
 
     steps:
       # 1. チェックアウト (★重要: プッシュ操作のために設定を変更)
