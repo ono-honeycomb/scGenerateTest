@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredPWMLead",
+  "discription": "パルス波とPWM（パルス幅変調）を組み合わせ、さらにエンベロープで制御されるレゾナントローパスフィルターを適用したリード音色です。PWMレート、フィルターカットオフ、エンベロープによるフィルター追従量を調整できます。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, lpfCutoff=4000, rq=0.5, pwmRate=2, lpfEnvAmount=0.5;    var sig;    var env = EnvGen.ar(        Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),        gate: gate,        doneAction: 2    );    var pwm = LFSaw.kr(pwmRate).range(0.1, 0.9);    var filterFreq = lpfCutoff + (lpfCutoff * lpfEnvAmount * env);    sig = Pulse.ar(freq, pwm * pulseWidth);    sig = RLPF.ar(sig, filterFreq, rq);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
