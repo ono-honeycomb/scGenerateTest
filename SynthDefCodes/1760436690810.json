@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredSquareWave",
+  "discription": "A classic subtractive synth sound featuring a square wave oscillator passed through a resonant low-pass filter, with independent ADSR envelopes for amplitude and filter cutoff modulation. This creates a versatile, rich tone suitable for leads, basses, or pads.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=8000, rq=0.5, attack=0.01, decay=0.1, sustain=0.8, release=1.0, filterAttack=0.1, filterDecay=0.2, filterSustain=0.5, filterRelease=0.5, filterModAmount=0.5;var sig, env, filterEnv, filterFreq;env = EnvGen.ar(Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2);filterEnv = EnvGen.ar(Env.adsr(filterAttack, filterDecay, filterSustain, filterRelease, curve: -4), gate: gate);filterFreq = cutoff * (1 + (filterEnv * filterModAmount));filterFreq = filterFreq.clip(20, 20000);sig = Pulse.ar(freq, width: 0.5);sig = RLPF.ar(sig, filterFreq, rq);sig = sig * amp * env;Out.ar(out, sig ! 2);}"
+}
