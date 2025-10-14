@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckFilterSaw",
+  "discription": "A plucked sound using a sawtooth oscillator, shaped by a quick ADSR envelope and a resonant low-pass filter with a decaying cutoff frequency.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoffBase=2000, cutoffRange=8000; var sig, env, filterEnv; env = EnvGen.ar(Env.adsr(0.001, 0.15, 0.0, 0.2, curve: -4), gate: gate, doneAction: 2); filterEnv = EnvGen.ar(Env.adsr(0.001, 0.2, 0.0, 0.2, curve: -4), gate: gate); sig = Saw.ar(freq); sig = LPF.ar(sig, cutoffBase + (cutoffRange * filterEnv), rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
