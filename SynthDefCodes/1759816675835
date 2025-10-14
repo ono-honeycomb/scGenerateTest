@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMbell",
+  "discription": "A percussive FM bell sound with a rapidly decaying modulation index. The 'modRatio' controls the harmonic relationship of the FM, and 'modDepth' controls the intensity of the frequency modulation.",
+  "code": "SynthDef(\\FMbell, { arg out=0, freq=440, amp=0.1, gate=1, modRatio=1.414, modDepth=100; var sig, carrier, modulator, env, modIndexEnv; env = EnvGen.ar(Env.adsr(0.005, 0.1, 0.5, 0.8, curve: -4), gate: gate, doneAction: 2); modIndexEnv = EnvGen.ar(Env.perc(0.001, 0.6, curve: -4), gate: gate); modulator = SinOsc.ar(freq * modRatio); carrier = SinOsc.ar(freq + (modulator * (modDepth * modIndexEnv))); sig = carrier * amp * env; Out.ar(out, sig ! 2); }).add;"
+}
