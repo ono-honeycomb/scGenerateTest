@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SoftPad",
+  "discription": "A gentle, sustained pad sound using a saw wave, filtered by a low-pass filter with a slow ADSR envelope, and subtle amplitude modulation.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoff=2000;\n    var sig, env, lfo;\n    env = EnvGen.ar(\n        Env.adsr(0.5, 1.0, 0.7, 2.0, curve: -4),\n        gate: gate,\n        doneAction: 2\n    );\n    lfo = SinOsc.kr(0.1).range(0.8, 1.2); // Slow, subtle amplitude modulation\n    sig = Saw.ar(freq) * amp * env * lfo;\n    sig = LPF.ar(sig, cutoff * env.linlin(0, 1, 0.5, 1.5)); // Filter with cutoff modulated by envelope\n    Out.ar(out, sig ! 2);\n}"
+}
