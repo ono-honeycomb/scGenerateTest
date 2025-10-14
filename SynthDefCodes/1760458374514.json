@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "BasicSawLead",
+  "discription": "A simple saw wave lead synth with two slightly detuned oscillators and a standard ADSR envelope for a thick, cutting sound.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005;\\nvar sig;\\nvar env = EnvGen.ar(\\nEnv.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),\\ngate: gate,\\ndoneAction: 2\\n);\\nvar saw1 = Saw.ar(freq);\\nvar saw2 = Saw.ar(freq * (1 + detune));\\nsig = (saw1 + saw2) * 0.5 * amp * env;\\nOut.ar(out, sig ! 2);\\n}"
+}
