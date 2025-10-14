@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMBell",
+  "discription": "FMシンセシスを使ったシンプルなベル音。変調比と変調指数で音色を調整できます。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, modFreqRatio=1.4, modIndex=5.0; var sig, mod; var env = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); mod = SinOsc.ar(freq * modFreqRatio) * (freq * modIndex); sig = SinOsc.ar(freq + mod) * amp * env; Out.ar(out, sig ! 2); }"
+}
