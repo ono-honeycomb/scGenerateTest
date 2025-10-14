@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimplePad",
+  "discription": "A warm and evolving pad sound using detuned sawtooth waves, a resonant low-pass filter, and a subtle chorus effect for spaciousness.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=3000, rq=0.5, pan=0, detune=0.003, chorusFreq=1.0, chorusDepth=0.005;    var sig, env;    env = EnvGen.ar(        Env.adsr(1.5, 2.0, 0.7, 3.0, curve: -4),        gate: gate,        doneAction: 2    );    sig = Saw.ar(freq * [1.0, 1.0 + detune]);    sig = RLPF.ar(sig, cutoff, rq);    sig = Chorus.ar(sig, freq: [chorusFreq, chorusFreq * 1.05], depth: [chorusDepth, chorusDepth * 1.1], feedback: 0.1, maxdelay: 0.02);    sig = sig * amp * env;    Out.ar(out, Pan2.ar(sig, pan) * 2);}"
+}
