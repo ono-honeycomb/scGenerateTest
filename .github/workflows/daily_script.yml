@@ -36,3 +36,5 @@ jobs:
       # 4. index.jsの実行
       - name: Run index.js with Node
         run: node index.js
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
