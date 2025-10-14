@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredPulse",
+  "discription": "A classic pulse wave synth with a resonant low-pass filter, where both amplitude and filter cutoff are controlled by separate envelopes. It allows for dynamic timbre changes.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, rq=0.5, filterBase=500, filterRange=4000, filterEnvAttack=0.01, filterEnvDecay=0.5, filterEnvSustain=0.5, filterEnvRelease=1.0; var sig, ampEnv, filterCutoffEnv; ampEnv = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); filterCutoffEnv = EnvGen.ar( Env.adsr(filterEnvAttack, filterEnvDecay, filterEnvSustain, filterEnvRelease), gate: gate ); sig = Pulse.ar(freq, pulseWidth); sig = RLPF.ar(sig, filterBase + (filterRange * filterCutoffEnv), rq); sig = sig * amp * ampEnv; Out.ar(out, sig ! 2); }"
+}
