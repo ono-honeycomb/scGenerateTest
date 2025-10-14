@@ -44,7 +44,7 @@ if (!apiKey) {
   process.exit(1);
 }
 
-const outputFilePath = 'SynthDefCodes/' + Date.now().toString();
+const outputFilePath = 'SynthDefCodes/' + Date.now().toString() + ".json";
 
 
 // クライアントを初期化

@@ -1,40 +1,45 @@
-name: Daily Node.js Script Execution
+name: Daily Node.js Script Execution and Commit
 
-# ワークフローを実行するトリガーを定義
 on:
   schedule:
-    # 毎日 UTC 00:00 (協定世界時午前0時) に実行
-    # 日本時間 (JST) では 午前9時 に相当します
-    # 実行時間を変更したい場合は cron 式を変更してください
-    # 例: 毎日 10:30 (UTC) に実行したい場合: '30 10 * * *'
     - cron: '0 0 * * *'
-
-  # GitHub Actionsの画面から手動で実行するためのトリガー
   workflow_dispatch:
 
 jobs:
-  run_node_script:
-    # GitHubがホストする最新のUbuntu環境を使用
+  run_and_commit:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. リポジトリのコードをランナーにチェックアウト
+      # 1. チェックアウト (★重要: プッシュ操作のために設定を変更)
       - name: Checkout repository code
         uses: actions/checkout@v4
+        with:
+          # `GITHUB_TOKEN`にコミット権限を与えるために必要
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2. Node.js環境のセットアップ
-      # 必要なNode.jsのバージョンを指定してください
+      # 2. Node.js環境のセットアップ (省略)
       - name: Set up Node.js 22.16.0
         uses: actions/setup-node@v4
         with:
           node-version: '22.16.0'
 
-      # 3. 依存関係のインストール (package.jsonがある場合)
+      # 3. 依存関係のインストール (省略)
       - name: Install dependencies
         run: npm install
 
-      # 4. index.jsの実行
-      - name: Run index.js with Node
+      # 4. index.jsの実行 (JSONファイルを生成)
+      - name: Run Node.js script and generate JSON
         run: node index.js
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      # 5. ★ 変更をコミットし、プッシュする
+      - name: Commit and Push new JSON file
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # どのファイルをコミットするか指定
+          file_pattern: 'SynthDefCodes/*.json'
+          commit_message: 'feat(data): Add daily Gemini report (automated)'
+          # ワークフローを実行したユーザーとしてコミット
+          commit_user_name: 'github-actions[bot]'
+          commit_user_email: 'github-actions[bot]@users.noreply.github.com'
