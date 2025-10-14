@@ -1,0 +1,38 @@
+name: Daily Node.js Script Execution
+
+# ワークフローを実行するトリガーを定義
+on:
+  schedule:
+    # 毎日 UTC 00:00 (協定世界時午前0時) に実行
+    # 日本時間 (JST) では 午前9時 に相当します
+    # 実行時間を変更したい場合は cron 式を変更してください
+    # 例: 毎日 10:30 (UTC) に実行したい場合: '30 10 * * *'
+    - cron: '0 0 * * *'
+
+  # GitHub Actionsの画面から手動で実行するためのトリガー
+  workflow_dispatch:
+
+jobs:
+  run_node_script:
+    # GitHubがホストする最新のUbuntu環境を使用
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. リポジトリのコードをランナーにチェックアウト
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      # 2. Node.js環境のセットアップ
+      # 必要なNode.jsのバージョンを指定してください
+      - name: Set up Node.js 22.16.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+
+      # 3. 依存関係のインストール (package.jsonがある場合)
+      - name: Install dependencies
+        run: npm install
+
+      # 4. index.jsの実行
+      - name: Run index.js with Node
+        run: node index.js
