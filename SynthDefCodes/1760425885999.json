@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsarPad",
+  "discription": "A gentle, pulsing pad sound using a filtered pulse wave with a slow attack and decay, creating a soft, evolving texture.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, pan=0;    var sig, env, lfo;    env = EnvGen.ar(        Env.adsr(2.0, 3.0, 0.7, 5.0, curve: -4),        gate: gate,        doneAction: 2    );    lfo = SinOsc.ar(0.2).range(0.01, 0.05);    sig = Pulse.ar(freq, lfo);    sig = RLPF.ar(sig, freq * 1.5, rq);    sig = sig * amp * env;    Out.ar(out, Pan2.ar(sig, pan));}"
+}
