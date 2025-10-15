@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SoftPulse",
+  "discription": "A soft, warm pulse wave with a gentle ADSR envelope, suitable for pads or sustained tones.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.1;    var sig;    var env = EnvGen.ar(        Env.adsr(0.05, 0.5, 0.7, 1.5, curve: -2),        gate: gate,        doneAction: 2    );    sig = Pulse.ar(freq, pulseWidth) * amp * env;    Out.ar(out, sig ! 2);}"
+}
