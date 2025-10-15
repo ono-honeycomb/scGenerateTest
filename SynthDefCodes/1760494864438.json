@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMBell",
+  "discription": "短いアタックと素早い減衰を持つ、FM合成によるベルのような音色です。変調比と変調深度を調整できます。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, modIndex=1.0, modRatio=1.4;    var sig;    var ampEnv = EnvGen.ar(        Env.adsr(0.001, 0.1, 0.0, 0.5, curve: -4),        gate: gate,        doneAction: 2    );    var modEnv = EnvGen.ar(        Env.adsr(0.001, 0.05, 0.0, 0.2, curve: -4),        gate: gate    );    var modulator = SinOsc.ar(freq * modRatio) * (freq * modIndex * modEnv);    var carrier = SinOsc.ar(freq + modulator);    sig = carrier * amp * ampEnv;    Out.ar(out, sig ! 2);}"
+}
