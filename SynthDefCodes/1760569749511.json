@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsePad",
+  "discription": "A warm and evolving pad sound using a pulse wave with subtle pulse width modulation (PWM) and a long, smooth attack/release envelope, suitable for sustained atmospheric textures.",
+  "code": "{ arg out=0, freq=220, amp=0.2, gate=1, pulseWidth=0.5, pmDepth=0.01, pmRate=0.5;    var sig;    var env = EnvGen.ar(        Env.adsr(2.0, 3.0, 0.7, 5.0, curve: -2),        gate: gate,        doneAction: 2    );    var pm = SinOsc.kr(pmRate, mul: pmDepth);    sig = Pulse.ar(freq, pulseWidth + pm) * amp * env;    Out.ar(out, sig ! 2);}"
+}
