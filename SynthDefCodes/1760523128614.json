@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredPulse",
+  "discription": "A simple pulse wave with a variable width, passed through a resonant low-pass filter controlled by the fundamental frequency, with an ADSR amplitude envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, rq=0.5, cutoffRatio=2, pan=0; var sig; var env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2); sig = Pulse.ar(freq, pulseWidth); sig = LPF.ar(sig, freq * cutoffRatio, rq); sig = Pan2.ar(sig * amp * env, pan); Out.ar(out, sig); }"
+}
