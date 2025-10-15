@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckBell",
+  "discription": "A short, bell-like pluck sound with a decaying filtered noise burst.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, decay=0.8;    var sig;    var env = EnvGen.ar(        Env.perc(0.005, decay, curve: -4),        gate: gate,        doneAction: 2    );    var noise = WhiteNoise.ar(0.5) * env;    sig = BPF.ar(noise, freq, 0.05) * amp;    Out.ar(out, sig ! 2);}"
+}
