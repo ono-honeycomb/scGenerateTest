@@ -1,0 +1,5 @@
+{
+    "SynthDefName": "VibratoSine",
+    "discription": "A simple sine wave with an ADSR envelope and a subtle vibrato effect controlled by LFO.",
+    "code": "{ arg out=0, freq=440, amp=0.1, gate=1, vibRate=5, vibDepth=0.01;    var sig, env, vibrato;    env = EnvGen.ar(        Env.adsr(0.005, 0.2, 0.6, 0.5, curve: -4),        gate: gate,        doneAction: 2    );    vibrato = LFSin.kr(vibRate) * vibDepth * freq;    sig = SinOsc.ar(freq + vibrato) * amp * env;    Out.ar(out, sig ! 2);}"
+}
