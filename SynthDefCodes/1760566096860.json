@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "WarmPad",
+  "discription": "ゆっくりと立ち上がり、広がるような温かいパッドサウンド。わずかな揺らぎとステレオ感が特徴。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, detune=0.005, cutoff=4000, rq=0.5, lfoFreq=0.1, lfoDepth=0.05; var sig, env, lfo; env = EnvGen.ar(Env.adsr(3.0, 1.0, 0.7, 5.0, curve: -4), gate: gate, doneAction: 2); lfo = SinOsc.kr(lfoFreq) * lfoDepth; sig = Pulse.ar(freq * (1 + detune + lfo)) + Pulse.ar(freq * (1 - detune + lfo)); sig = sig * 0.5; sig = RLPF.ar(sig, cutoff, rq); sig = sig * amp * env; Out.ar(out, Pan2.ar(sig, pan)); }"
+}
