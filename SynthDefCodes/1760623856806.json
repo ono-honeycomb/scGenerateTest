@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilterSaw",
+  "discription": "A filtered saw wave with a subtle detune and a resonant low-pass filter, featuring a filter envelope sweep.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=1.005, filterFreq=4000, rq=0.5, filterEnvAttack=0.01, filterEnvDecay=0.2; var sig, env, filterEnv; env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2); sig = (Saw.ar(freq) * 0.5) + (Saw.ar(freq * detune) * 0.5); filterEnv = EnvGen.ar(Env.perc(filterEnvAttack, filterEnvDecay), gate: gate, doneAction: 0); sig = RLPF.ar(sig, filterFreq * (filterEnv * 0.8 + 0.2), rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
