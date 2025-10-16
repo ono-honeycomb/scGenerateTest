@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredNoisePad",
+  "discription": "A soft, evolving noise pad created with filtered white noise and a long envelope, suitable for ambient textures.",
+  "code": "{ arg out=0, amp=0.1, gate=1, cutoff=2000, rq=0.5;    var sig;    var env = EnvGen.ar(        Env.adsr(0.5, 2.0, 0.7, 4.0, curve: -2),        gate: gate,        doneAction: 2    );    sig = WhiteNoise.ar(amp);    sig = RLPF.ar(sig, cutoff, rq);    sig = sig * env;    Out.ar(out, sig ! 2);}"
+}
