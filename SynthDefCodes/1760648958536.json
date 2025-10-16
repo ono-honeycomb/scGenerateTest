@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimpleFMSynth",
+  "discription": "A basic frequency modulation (FM) synthesizer with an ADSR envelope, featuring carrier and modulator interaction to create richer timbres.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, ratio=1.5, index=5; var car, mod, env; env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2); mod = SinOsc.ar(freq * ratio) * (freq * index); car = SinOsc.ar(freq + mod); Out.ar(out, (car * amp * env) ! 2);}"
+}
