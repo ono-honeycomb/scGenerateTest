@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "Pluck",
+  "discription": "A short, percussive plucked sound with a quick decay, suitable for pizzicato or mallet-like effects.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, attack=0.005, decay=0.2, curve=-4;var sig, env;env = EnvGen.ar(Env.perc(attack, decay, curve: curve),gate: gate,doneAction: 2);sig = SinOsc.ar(freq);var transientNoise = WhiteNoise.ar(0.02);transientNoise = HPF.ar(transientNoise, 2000);transientNoise = transientNoise * EnvGen.ar(Env.perc(0.001, 0.05), gate: gate);sig = (sig + transientNoise);sig = sig * amp * env;Out.ar(out, Pan2.ar(sig, pan));}"
+}
