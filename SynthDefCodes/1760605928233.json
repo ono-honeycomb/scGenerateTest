@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredPulseSynth",
+  "discription": "A pulse wave synthesizer with an ADSR amplitude envelope and a resonant low-pass filter whose cutoff frequency is modulated by a separate percussion envelope. Allows control over pulse width, filter base frequency, resonance, and filter envelope characteristics.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, filterBase=2000, filterRes=0.5, filterEnvAttack=0.01, filterEnvDecay=0.5, filterEnvDepth=1000; var sig; var ampEnv = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2); var filterEnv = EnvGen.ar(Env.perc(filterEnvAttack, filterEnvDecay), gate: gate); var cutoff = filterBase + (filterEnv * filterEnvDepth); cutoff = cutoff.max(50); sig = Pulse.ar(freq, pulseWidth); sig = RLPF.ar(sig, cutoff, filterRes); sig = sig * amp * ampEnv; Out.ar(out, sig ! 2); }"
+}
