@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "WarmPad",
+  "discription": "A warm, slowly evolving pad sound using two slightly detuned sine waves and a long ADSR envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0; var sig, env, freq1, freq2; env = EnvGen.ar(Env.adsr(0.5, 2.0, 0.7, 4.0, curve: -2), gate: gate, doneAction: 2); freq1 = freq; freq2 = freq * 1.005; sig = SinOsc.ar(freq1) * 0.5 + SinOsc.ar(freq2) * 0.5; sig = sig * amp * env; Out.ar(out, Pan2.ar(sig, pan)); }"
+}
