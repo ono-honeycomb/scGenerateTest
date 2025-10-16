@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedPulseFilter",
+  "discription": "デチューンされたパルス波とADSRエンベロープ、エンベロープでモジュレーションされるローパスフィルターを組み合わせた音色。少し厚みのあるリードサウンドやパッドに適しています。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=4000, rq=0.5; var sig, env; var envCurve = Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4); env = EnvGen.ar(envCurve, gate: gate, doneAction: 2); sig = (Pulse.ar(freq, 0.5) + Pulse.ar(freq * 1.007, 0.5)) * 0.5; sig = LPF.ar(sig, cutoff * env.linlin(0, 1, 0.5, 1.5).clip(0.5, 2.0), rq) * amp * env; Out.ar(out, sig ! 2); }"
+}
