@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSawPad",
+  "discription": "A classic warm pad sound featuring two detuned sawtooth oscillators and a resonant low-pass filter, with adjustable envelope parameters for evolving textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, atk=0.8, dec=1.0, sus=0.5, rel=1.5, detune=1.005, cutoff=4000, rq=0.5;    var sig;    var env = EnvGen.ar(        Env.adsr(atk, dec, sus, rel, curve: -4),        gate: gate,        doneAction: 2    );    var s1 = Saw.ar(freq);    var s2 = Saw.ar(freq * detune);    sig = (s1 + s2) * 0.5;    sig = RLPF.ar(sig, cutoff, rq);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
