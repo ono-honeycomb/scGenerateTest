@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSawSynth",
+  "discription": "A detuned saw wave synth with a resonant low-pass filter, offering a thicker, more aggressive sound than a simple sine. The filter cutoff and resonance can be controlled.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=3000, rq=0.5;    var sig, env;    env = EnvGen.ar(        Env.adsr(0.01, 0.3, 0.7, 0.5, curve: -4),        gate: gate,        doneAction: 2    );    sig = Saw.ar(freq * 0.99) + Saw.ar(freq * 1.01);    sig = LPF.ar(sig, cutoff, rq);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
