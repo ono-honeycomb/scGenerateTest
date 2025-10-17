@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredPulseSynth",
+  "discription": "二つのデチューンされたパルス波をレゾナントローパスフィルターに通したシンセ音。厚みのあるサウンドが特徴です。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, pulseWidth=0.5, rq=0.5;var sig, env;env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),gate: gate,doneAction: 2);sig = Pulse.ar(freq, pulseWidth) + Pulse.ar(freq * (1 + detune), pulseWidth);sig = RLPF.ar(sig, freq * 2, rq);sig = sig * amp * env;Out.ar(out, sig ! 2);}"
+}
