@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredPulseLead",
+  "discription": "A rich, filtered pulse wave lead sound with a slight detune for thickness and ADSR envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, attack=0.01, decay=0.1, sustain=0.8, release=1.0, curve_env=-4, cutoff=2000, rq=0.5;    var sig, env;    var detune = 1.005;    var pulseWidth = 0.5;    env = EnvGen.ar(        Env.adsr(attack, decay, sustain, release, curve: curve_env),        gate: gate,        doneAction: 2    );    sig = Pulse.ar(freq * (1 - (detune/2000)), pulseWidth) + Pulse.ar(freq * (1 + (detune/2000)), pulseWidth);    sig = sig * 0.5;    sig = RLPF.ar(sig, cutoff, rq);    sig = sig * amp * env;    Out.ar(out, Pan2.ar(sig, pan));}"
+}
