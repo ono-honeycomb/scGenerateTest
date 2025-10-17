@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSaw",
+  "discription": "のこぎり波とエンベロープでモジュレーションされたローパスフィルターを使った、アタックの速い金属的な音色です。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoff=1000;    var sig, env;    env = EnvGen.ar(        Env.adsr(0.005, 0.1, 0.7, 0.5, curve: -4),         gate: gate,        doneAction: 2    );    sig = Saw.ar(freq);    sig = RLPF.ar(        sig,        cutoff + (env * 2000),         rq    );    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
