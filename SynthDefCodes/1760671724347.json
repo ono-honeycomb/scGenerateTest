@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "MellowPad",
+  "discription": "A warm and sustained pad sound created with detuned sine waves, an ADSR envelope for amplitude, and a low-pass filter with a subtle cutoff envelope for movement.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, attack=0.5, decay=1.0, sustain=0.8, release=2.0, detune=0.005, filterCutoff=3000, filterQ=0.5, filterEnvAttack=0.5, filterEnvRelease=1.5;    var ampEnv = EnvGen.ar(        Env.adsr(attack, decay, sustain, release, curve: -4),        gate: gate,        doneAction: 2    );    var filterEnv = EnvGen.ar(        Env.adsr(filterEnvAttack, 0.1, 0.7, filterEnvRelease, curve: -4),        gate: gate    );    var osc1 = SinOsc.ar(freq);    var osc2 = SinOsc.ar(freq * (1 + detune));    var osc3 = SinOsc.ar(freq * (1 - detune));    var mixedOscs = (osc1 + osc2 + osc3) / 3;    var currentCutoff = LFCurve.kr(filterCutoff * filterEnv.linlin(0, 1, 0.5, 1.5), filterCutoff);    var filteredSig = RLPF.ar(mixedOscs, currentCutoff, filterQ);    var sig = filteredSig * amp * ampEnv;    Out.ar(out, sig ! 2);}"
+}
