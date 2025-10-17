@@ -1,0 +1,1 @@
+{"SynthDefName":"PluckyBass","discription":"A punchy and percussive bass sound, crafted using a filtered pulse wave and a short decay envelope.","code":"{ arg out=0, freq=60, amp=0.2, gate=1, rq=0.5, pan=0; var sig; var env = EnvGen.ar(Env.perc(0.005, 0.3), gate: gate, doneAction: 2); sig = LPF.ar(Pulse.ar(freq, 0.5), freq * 2, rq) * amp * env; Out.ar(out, Pan2.ar(sig, pan)); }"}
