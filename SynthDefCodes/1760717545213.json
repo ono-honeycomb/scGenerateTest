@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SawPad",
+  "discription": "A warm, detuned saw wave pad with a low-pass filter. It uses three detuned saw oscillators for a rich, wide sound, shaped by a resonant low-pass filter and a slow ADSR envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, cutoff=8000, rq=0.5;var sig, env;env = EnvGen.ar(Env.adsr(0.5, 1.0, 0.7, 2.0, curve: -4), gate: gate, doneAction: 2);sig = Saw.ar(freq * (1 - detune)) +Saw.ar(freq) +Saw.ar(freq * (1 + detune));sig = sig * (amp / 3);sig = RLPF.ar(sig, cutoff, rq);sig = sig * env;Out.ar(out, sig ! 2);}"
+}
