@@ -1,0 +1,1 @@
+{"SynthDefName":"SimplePulse","discription":"SuperColliderで作成されたシンプルなパルス波の音色です。ADSRエンベロープで音量を制御し、デューティサイクルを可変にできます。","code":"{ arg out=0, freq=440, amp=0.1, gate=1, duty=0.5;    var sig;    var env = EnvGen.ar(        Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),        gate: gate,        doneAction: 2    );    sig = Pulse.ar(freq, duty) * amp * env;    Out.ar(out, sig ! 2);}"}
