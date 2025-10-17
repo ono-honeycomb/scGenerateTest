@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimplePad",
+  "discription": "A smooth, evolving pad sound using detuned sine waves passed through a low-pass filter with a long ADSR envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, attack=0.5, decay=0.8, sustain=0.7, release=2.0, detune1=0.99, detune2=1.01, cutoffFreq=2000, rq=0.5; var env = EnvGen.ar(Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2); var sig1 = SinOsc.ar(freq * detune1); var sig2 = SinOsc.ar(freq); var sig3 = SinOsc.ar(freq * detune2); var oscMix = (sig1 + sig2 + sig3) / 3; var filteredSig = LPF.ar(oscMix, cutoffFreq); var finalSig = filteredSig * amp * env; Out.ar(out, finalSig ! 2); }"
+}
