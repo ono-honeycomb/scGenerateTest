@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMSynth",
+  "discription": "A classic FM synthesis sound with an ADSR envelope. It uses two sine waves, a carrier and a modulator, to create complex harmonic content. Parameters 'carRatio', 'modRatio', and 'modIndex' allow for a wide range of timbres from bell-like to aggressive.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, carRatio=1.0, modRatio=1.5, modIndex=5.0; var sig, modulator, env; env = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); modulator = SinOsc.ar(freq * modRatio) * (freq * modIndex); sig = SinOsc.ar(freq * carRatio + modulator); Out.ar(out, sig * amp * env ! 2); }"
+}
