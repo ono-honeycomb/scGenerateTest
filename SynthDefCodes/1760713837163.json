@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimpleSaw",
+  "discription": "A basic sawtooth wave synthesizer with an ADSR envelope, good for pads or leads.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, attack=0.01, decay=0.1, sustain=0.8, release=1.0, curve=-4;    var sig;    var env = EnvGen.ar(        Env.adsr(attack, decay, sustain, release, curve: curve),        gate: gate,        doneAction: 2    );    sig = Saw.ar(freq) * amp * env;    Out.ar(out, sig ! 2);}"
+}
