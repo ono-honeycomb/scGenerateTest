@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@google/genai": "^1.22.0",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "node-osc": "^11.0.0"
   }
 }
