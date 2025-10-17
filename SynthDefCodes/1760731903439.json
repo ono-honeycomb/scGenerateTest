@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSynth",
+  "discription": "A simple plucked string sound using Decay to excite a BPF, with a short delay for ambience.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, dec=0.2, rq=0.05, delaytime=0.1, fb=0.5;\\n    var sig, env, pluckEnv, delaySig;\\n    env = EnvGen.ar(\\n        Env.adsr(0.01, 0.1, 0.8, 0.5, curve: -4),\\n        gate: gate,\\n        doneAction: 2\\n    );\\n    pluckEnv = EnvGen.ar(Env.new([1, 0], [dec], [EnvCurve.exp]), gate: gate);\\n    sig = BPF.ar(WhiteNoise.ar(0.1) * pluckEnv, freq, rq);\\n    sig = sig * amp * env;\\n\\n    delaySig = DelayN.ar(sig, 0.2, delaytime);\\n    delaySig = DelayN.ar(delaySig, 0.2, delaytime) * fb;\\n\\n    sig = sig + delaySig;\\n\\n    Out.ar(out, sig ! 2);\\n}"
+}
