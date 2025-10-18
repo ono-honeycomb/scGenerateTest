@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "WobblySquare",
+  "discription": "A square wave synth with a subtle, slow pulse width modulation, creating a 'wobbly' character.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, pmFreq=0.5, pmDepth=0.05; var sig; var env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 0.5, curve: -4), gate: gate, doneAction: 2); var pmod = SinOsc.kr(pmFreq) * pmDepth; sig = Pulse.ar(freq, pulseWidth + pmod) * amp * env; Out.ar(out, sig ! 2); }"
+}
