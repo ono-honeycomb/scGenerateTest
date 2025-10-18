@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SawtoothPad",
+  "discription": "A warm sawtooth wave synth with a simple ADSR envelope and a low-pass filter whose cutoff is slightly modulated by the amplitude envelope, creating a gentle evolving timbre.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, sustain=0.8, rel=1.0, cutoff=8000, rq=0.5; var sig; var env = EnvGen.ar(Env.adsr(0.01, 0.1, sustain, rel, curve: -4), gate: gate, doneAction: 2); sig = SawOsc.ar(freq); sig = LPF.ar(sig, cutoff * env.linlin(0, 1, 0.5, 1.0)) * amp * env; Out.ar(out, sig ! 2); }"
+}
