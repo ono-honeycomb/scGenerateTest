@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSynth",
+  "discription": "A simple plucky synth sound using a fast decaying envelope and a sine wave with a subtle frequency modulation for added richness.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0;    var sig, env;    env = EnvGen.ar(        Env.perc(0.01, 0.8, amp, -4),        gate: gate,        doneAction: 2    );    sig = SinOsc.ar(freq + (SinOsc.kr(8).mul(freq * 0.005))) * env;    Out.ar(out, Pan2.ar(sig, pan));}"
+}
