@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SawPad",
+  "discription": "A warm saw wave pad with a soft attack and release, filtered for smoothness.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoff=4000; var sig, env; env = EnvGen.ar( Env.adsr(0.5, 1.0, 0.7, 2.0, curve: -2), gate: gate, doneAction: 2 ); sig = Saw.ar(freq); sig = LPF.ar(sig, cutoff); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
