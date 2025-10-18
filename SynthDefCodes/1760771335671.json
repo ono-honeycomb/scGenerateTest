@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "KickDrum",
+  "discription": "A punchy kick drum sound using a sine wave with a quickly decaying amplitude and a descending pitch envelope for a classic 'thump'.",
+  "code": "{ arg out=0, freq=60, amp=0.8, gate=1; var sig; var ampEnv = EnvGen.ar(Env.perc(0.001, 0.2, amp), gate: gate, doneAction: 2); var pitchEnv = EnvGen.ar(Env([freq * 2.5, freq, freq * 0.8], [0.02, 0.1], curve: -4), gate: gate, doneAction: 0); sig = SinOsc.ar(pitchEnv); sig = sig * ampEnv; Out.ar(out, sig ! 2); }"
+}
