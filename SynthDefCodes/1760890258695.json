@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedPad",
+  "discription": "Two detuned sine oscillators are used to create a rich pad sound, further shaped by a slowly evolving low-pass filter cutoff frequency. The envelope provides a smooth attack and release.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, detune=1.005, attack=2, release=4;    var sig, env, filterEnv, carrier1, carrier2;    env = EnvGen.ar(        Env.adsr(attack, 0.5, 0.8, release, curve: -4),        gate: gate,        doneAction: 2    );    filterEnv = EnvGen.kr(        Env.adsr(attack * 0.5, 0.5, 0.5, release * 0.8),        gate: gate    );    carrier1 = SinOsc.ar(freq);    carrier2 = SinOsc.ar(freq * detune);    sig = (carrier1 + carrier2) * 0.5;    sig = LPF.ar(sig, (filterEnv * 16000) + 200);    sig = sig * amp * env;    Out.ar(out, Pan2.ar(sig, pan));}"
+}
