@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimplePluck",
+  "discription": "A simple plucked string-like sound using a Karplus-Strong synthesis algorithm.",
+  "code": "{ arg out=0, freq=440, amp=0.2, gate=1, decay=0.8;    var sig, excite, env;    excite = WhiteNoise.ar(0.5) * EnvGen.ar(Env.perc(0.005, 0.05), gate: gate, doneAction:0);    sig = DelayC.ar(excite, 1/freq, 1/freq) * decay;    env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 0.5, curve: -4), gate: gate, doneAction: 2);    Out.ar(out, (sig * amp * env) ! 2);}"
+}
