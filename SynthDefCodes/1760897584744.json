@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredSaw",
+  "discription": "A saw wave synthesizer with a low-pass filter and ADSR envelope, good for warm pads or leads.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoff=3000; var sig; var env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2); sig = LPF.ar(Saw.ar(freq), cutoff, rq) * amp * env; Out.ar(out, sig ! 2); }"
+}
