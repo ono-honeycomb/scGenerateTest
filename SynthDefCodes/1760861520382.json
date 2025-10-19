@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsatingSaw",
+  "discription": "A rich, pulsating saw wave with a stereo spread and subtle tremolo effect, suitable for pads or sustained tones. Features two detuned saw oscillators for stereo width and an LFO for amplitude modulation.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, releaseTime=1.0, lfoRate=5.0, lfoDepth=0.1;var sigL, sigR, env, tremolo;env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, releaseTime, curve: -4),gate: gate,doneAction: 2);tremolo = LFSin.kr(lfoRate).range(1.0 - lfoDepth, 1.0);sigL = Saw.ar(freq);sigR = Saw.ar(freq * 1.007);sigL = sigL * tremolo * amp * env;sigR = sigR * tremolo * amp * env;Out.ar(out, [sigL, sigR]);}"
+}
