@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSine",
+  "discription": "A simple plucked sine wave sound with a fast exponential decay envelope, suitable for percussive or short melodic notes.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0;var sig;var env = EnvGen.ar(Env.perc(0.01, 0.3), gate: gate, doneAction: 2);sig = SinOsc.ar(freq) * amp * env;Out.ar(out, Pan2.ar(sig, pan));}"
+}
