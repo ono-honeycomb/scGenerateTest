@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSaw",
+  "discription": "A detuned saw wave synth with an ADSR envelope and a low-pass filter, creating a rich, buzzing texture.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoff=4000;    var sig, env;    env = EnvGen.ar(        Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),        gate: gate,        doneAction: 2    );    sig = Saw.ar(freq * [1.0, 1.007]);    sig = LPF.ar(sig.sum * 0.5, cutoff);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
