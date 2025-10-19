@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "BrightSaw",
+  "discription": "A bright, pluck-like sound using a sawtooth wave, a low-pass filter, and an ADSR amplitude envelope. The filter cutoff is modulated by the amplitude envelope and a 'bright' parameter.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, atk=0.005, dec=0.3, sus=0.0, rel=0.1, bright=0.5;\\n    var sig, ampEnv;\\n    ampEnv = EnvGen.ar(\\n        Env.adsr(atk, dec, sus, rel, curve: -4),\\n        gate: gate,\\n        doneAction: 2\\n    );\\n    var baseCutoff = freq * 2 + (bright * 5000);\\n    var filterCutoff = baseCutoff * (0.5 + (ampEnv * 0.5));\\n    filterCutoff = filterCutoff.clip(50, 20000);\\n    sig = Saw.ar(freq);\\n    sig = LPF.ar(sig, filterCutoff, rq: 0.5);\\n    sig = sig * amp * ampEnv;\\n    Out.ar(out, sig ! 2);\\n}"
+}
