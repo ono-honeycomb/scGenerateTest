@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilterSawPad",
+  "discription": "A warm pad sound using two slightly detuned sawtooth waves, passed through a low-pass filter whose cutoff frequency slowly opens with the amplitude envelope, and then panned with subtle, slow modulation for stereo width. Features a long ADSR envelope for smooth attacks and releases, suitable for ambient textures or background harmony.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=4000, rq=0.5; var sig, env; env = EnvGen.ar(Env.adsr(2.0, 2.0, 0.7, 4.0, curve: -4), gate: gate, doneAction: 2); sig = (Saw.ar(freq) + Saw.ar(freq * 1.007)) * 0.5; var filterFreq = cutoff + (env * (cutoff * 0.5)).min(cutoff * 2); sig = LPF.ar(sig, filterFreq.clip(20, 20000), rq); sig = sig * amp * env; Out.ar(out, Pan2.ar(sig, LFNoise1.kr(0.1).range(-0.3, 0.3))); }"
+}
