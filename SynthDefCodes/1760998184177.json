@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SoftPad",
+  "discription": "A gentle, evolving pad sound created with multiple detuned sine oscillators and a slowly modulated low-pass filter to add movement and warmth.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, atk=1.0, dec=2.0, sus=0.7, rel=3.0, lpfFreq=8000, lpfRes=0.2, lfoRate=0.2; var sig, env, lfo; env = EnvGen.ar(Env.adsr(atk, dec, sus, rel, curve: -4), gate: gate, doneAction: 2); lfo = SinOsc.kr(lfoRate).range(0.1, 0.9); sig = SinOsc.ar(freq * 0.99) + SinOsc.ar(freq) + SinOsc.ar(freq * 1.01); sig = sig * (amp / 3); sig = RLPF.ar(sig, lpfFreq * lfo, lpfRes); sig = sig * env; Out.ar(out, sig ! 2); }"
+}
