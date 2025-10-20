@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsarPad",
+  "discription": "A soft, evolving pad sound using Pulse waves and a slow LFO for modulation, creating a gentle, spacey atmosphere.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0; var sig, env, lfo; env = EnvGen.ar(Env.adsr(2.0, 3.0, 0.7, 5.0, curve: -4), gate: gate, doneAction: 2); lfo = SinOsc.kr(0.1).range(0.01, 0.05); sig = Pulse.ar(freq * [1, 1.007, 0.993], lfo) * amp * env; sig = FreeVerb.ar(sig, 0.3, 0.8, 0.5); Out.ar(out, Pan2.ar(sig, pan)); }"
+}
