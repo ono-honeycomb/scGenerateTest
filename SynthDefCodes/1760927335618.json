@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimpleSawSynth",
+  "discription": "A basic sawtooth wave synthesizer with an ADSR envelope and stereo panning.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0;\n    var sig;\n    var env = EnvGen.ar(\n        Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),\n        gate: gate,\n        doneAction: 2\n    );\n    sig = Saw.ar(freq) * amp * env;\n    Out.ar(out, Pan2.ar(sig, pan));\n}"
+}
