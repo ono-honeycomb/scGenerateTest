@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSawFilter",
+  "discription": "A plucky sawtooth wave synth with an ADSR envelope controlling both amplitude and a resonant low-pass filter's cutoff frequency, with slight LFO modulation.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, attack=0.01, decay=0.2, sustain=0.05, release=0.3, cutoff=2000, rq=0.5; var sig; var env = EnvGen.ar(Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2); var lfo = SinOsc.kr(0.5).range(0.8, 1.2); var filterFreq = Lag.kr(cutoff * env, 0.01) * lfo; sig = Saw.ar(freq); sig = RLPF.ar(sig, filterFreq, rq); sig = Pan2.ar(sig * amp * env, pan); Out.ar(out, sig); }"
+}
