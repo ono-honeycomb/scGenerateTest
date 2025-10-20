@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSinePad",
+  "discription": "Two slightly detuned sine waves create a warm, evolving pad-like sound with a smooth ADSR envelope. The detune amount can be adjusted for a thicker or thinner sound.",
+  "code": "{ arg out=0, freq=444, amp=0.2, gate=1, detune=0.003, attack=0.8, decay=1.2, sustain=0.6, release=3.0; var sig1, sig2, env; env = EnvGen.ar(Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2); sig1 = SinOsc.ar(freq); sig2 = SinOsc.ar(freq * (1 + detune)); var mixedSig = (sig1 + sig2) * 0.5 * amp * env; Out.ar(out, mixedSig ! 2); }"
+}
