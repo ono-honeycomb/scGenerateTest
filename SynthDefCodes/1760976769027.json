@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PaddedSaw",
+  "discription": "A warm, evolving pad sound using a sawtooth oscillator passed through a resonant low-pass filter with a gentle attack and release.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=8000, rq=0.5; var sig; var env = EnvGen.ar(Env.adsr(0.5, 1.0, 0.7, 1.5, curve: -4), gate: gate, doneAction: 2); var lfo = SinOsc.kr(0.2).range(0.01, 0.05); sig = Saw.ar(freq * (1 + lfo.lag(0.1)), mul: 0.5); sig = LPF.ar(sig, cutoff * env.linexp(0, 1, 0.5, 1.5), rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
