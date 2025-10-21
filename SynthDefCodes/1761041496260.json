@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsePad",
+  "discription": "A warm, evolving pulse wave pad sound with a low-pass filter and a modulated filter cutoff.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, attack=2.0, decay=0.5, sustain=0.7, release=3.0, pulseWidth=0.5, filterBaseFreq=2000, filterRange=0.5, rq=0.5; var sig, env, filterEnv; env = EnvGen.ar( Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2 ); filterEnv = EnvGen.ar( Env.new([filterBaseFreq, filterBaseFreq * filterRange, filterBaseFreq], [attack, release], [4, -4]), gate: gate ); sig = Pulse.ar(freq, pulseWidth); sig = RLPF.ar(sig, filterEnv, rq); sig = sig * amp * env; Out.ar(out, Pan2.ar(sig, pan));}"
+}
