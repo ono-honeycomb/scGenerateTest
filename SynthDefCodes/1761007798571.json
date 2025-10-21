@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimplePad",
+  "discription": "A warm and simple pad sound using two slightly detuned sawtooth waves passed through a low-pass filter. The envelope features a long attack and release for a sustained sound.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, attack=3.0, decay=0.5, sustain=0.8, release=5.0, cutoff=4000; var sig; var env = EnvGen.ar( Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2 ); var osc1 = Saw.ar(freq); var osc2 = Saw.ar(freq * 1.002); sig = (osc1 + osc2) * 0.5; sig = LPF.ar(sig, cutoff.lag(0.01)); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
