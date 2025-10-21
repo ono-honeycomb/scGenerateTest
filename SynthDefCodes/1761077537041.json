@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimpleSawPad",
+  "discription": "A simple pad sound using a saw wave, with a subtle LFO for pitch variation, and a longer ADSR envelope for a sustained texture.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0; var sig, env, lfo; env = EnvGen.ar(Env.adsr(2.0, 3.0, 0.7, 4.0, curve: -4), gate: gate, doneAction: 2); lfo = LFCub.kr(0.2, 0, 0.005); sig = Saw.ar(freq * (1 + lfo)) * amp * env; Out.ar(out, Pan2.ar(sig, pan)); }"
+}
