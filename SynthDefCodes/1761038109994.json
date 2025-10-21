@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMBell",
+  "discription": "A simple FM synthesis bell sound, where the modulation index is also shaped by the main amplitude envelope, creating a brighter attack and softer sustain.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, ratio=1.414, modIndexScale=5;    var car, mod, sig;    var env = EnvGen.ar(        Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),        gate: gate,        doneAction: 2    );    car = freq;    mod = freq * ratio;    var currentModIndex = modIndexScale * env;    sig = SinOsc.ar(car + (SinOsc.ar(mod) * currentModIndex)) * amp * env;    Out.ar(out, sig ! 2);}"
+}
