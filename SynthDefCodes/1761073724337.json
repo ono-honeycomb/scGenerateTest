@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "BrightPluck",
+  "discription": "ノコギリ波とローパスフィルターを組み合わせた、明るくパーカッシブな音色。短いエンベロープで弦を弾いたような響きを表現します。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=5000, rq=0.5;\n    var sig;\n    var env = EnvGen.ar(\n        Env.adsr(0.005, 0.1, 0.5, 0.5, curve: -4),\n        gate: gate,\n        doneAction: 2\n    );\n    sig = Saw.ar(freq);\n    sig = LPF.ar(sig, cutoff * env.linlin(0, 1, 0.5, 1.0), rq);\n    sig = sig * amp * env;\n    Out.ar(out, sig ! 2);\n}"
+}
