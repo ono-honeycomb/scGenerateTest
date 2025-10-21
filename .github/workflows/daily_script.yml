@@ -29,9 +29,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # 4. index.jsの実行 (JSONファイルを生成)
+      # 4. jsの実行 (JSONファイルを生成)
       - name: Run Node.js script and generate JSON
-        run: node index.js
+        run: node generateSC.js
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 

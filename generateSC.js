@@ -1,4 +1,4 @@
-// index.js
+// generateSC.js
 
 const prompt = `
 あなたは優秀な音色クリエイターです。
