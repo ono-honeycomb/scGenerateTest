@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredNoiseLead",
+  "discription": "A lead-like sound generated from white noise passed through a resonant low-pass filter, where the cutoff frequency tracks the input frequency.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoffOffset=1000, cutoffScale=1.0; var sig; var env = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); var filterCutoff = freq * cutoffScale + cutoffOffset; sig = WhiteNoise.ar * env; sig = RLPF.ar(sig, filterCutoff, rq) * amp; Out.ar(out, sig ! 2); }"
+}
