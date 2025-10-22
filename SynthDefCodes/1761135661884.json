@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMBell",
+  "discription": "A simple Frequency Modulation (FM) synthesis for a bell-like or metallic percussive sound, with a quick decaying envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, bright=0.5, modIndex=5;var sig, env;env = EnvGen.ar(Env.perc(0.001, 0.8, curve: -4),gate: gate,doneAction: 2);var modFreq = freq * (1 + bright);var index = modIndex * env;sig = SinOsc.ar(freq + (SinOsc.ar(modFreq) * index));sig = sig * amp * env;Out.ar(out, sig ! 2);}"
+}
