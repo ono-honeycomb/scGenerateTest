@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SoftSquarePad",
+  "discription": "A soft, evolving pad sound using a pulse wave with a slow attack and release, creating a warm, sustained texture.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, pan=0; var sig, env, lfo, filter; env = EnvGen.ar(Env.adsr(2.0, 3.0, 0.7, 4.0, curve: -4), gate: gate, doneAction: 2); lfo = SinOsc.kr(0.1).range(0.01, 0.05); sig = Pulse.ar(freq * (1 + lfo), 0.5) * amp; filter = RLPF.ar(sig, freq * 3, rq); sig = Pan2.ar(filter, pan) * env; Out.ar(out, sig); }"
+}
