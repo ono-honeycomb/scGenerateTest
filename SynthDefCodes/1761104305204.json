@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsarPad",
+  "discription": "A warm, evolving pad sound with a slight detune between two pulse oscillators, modulated by a slow LFO controlling a low-pass filter for a smooth, spacey texture.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, lfoRate=0.2, filterBaseFreq=4000, filterRange=3000; var sig, env, lfo, cutoff; env = EnvGen.ar( Env.adsr(0.5, 2.0, 0.7, 3.0, curve: -4), gate: gate, doneAction: 2 ); sig = Pulse.ar(freq * (1 + detune), 0.5) + Pulse.ar(freq * (1 - detune), 0.5); sig = sig * amp * env; lfo = SinOsc.kr(lfoRate) * filterRange; cutoff = filterBaseFreq + lfo; cutoff = cutoff.max(50); sig = LPF.ar(sig, cutoff); Out.ar(out, sig ! 2); }"
+}
