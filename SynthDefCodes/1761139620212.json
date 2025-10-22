@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "simple_saw_pad",
+  "discription": "A warm and evolving pad sound created with two slightly detuned saw waves, modulated by a subtle vibrato and shaped by a slow ADSR envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, detune=0.005, vibratoRate=4, vibratoDepth=2; var sig; var env = EnvGen.ar( Env.adsr(1.5, 2.0, 0.6, 3.0, curve: -4), gate: gate, doneAction: 2 ); var currentFreq = freq + (SinOsc.kr(vibratoRate) * vibratoDepth); var saw1 = Saw.ar(currentFreq); var saw2 = Saw.ar(currentFreq * (1 + detune)); sig = (saw1 + saw2) * 0.5; sig = sig * amp * env; sig = Pan2.ar(sig, pan); Out.ar(out, sig); }"
+}
