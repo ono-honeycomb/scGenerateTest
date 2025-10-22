@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSynth",
+  "discription": "A simple, bright pluck sound with a decaying envelope and a resonant low-pass filter, suitable for percussive melodies or basslines.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=4000, rq=0.5;\\n    var sig;\\n    var env = EnvGen.ar(\\n        Env.perc(0.005, 0.5, curve: -4), // Quick pluck envelope\\n        gate: gate,\\n        doneAction: 2\\n    );\\n    sig = Saw.ar(freq); // Sawtooth wave for a brighter sound\\n    sig = RLPF.ar(sig, cutoff + (env * 2000), rq) * amp * env; // Resonant Low-Pass filter, cutoff modulated by envelope\\n    Out.ar(out, sig ! 2);\\n}"
+}
