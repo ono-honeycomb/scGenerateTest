@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSynth",
+  "discription": "A short, percussive pluck sound with a mix of sine wave and filtered noise, suitable for arpeggios or rhythmic parts.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.05, noiseMix=0.3; var sig, env, sineSig, noise, filteredNoise, pluckEnv; pluckEnv = Env.adsr(0.001, 0.1, 0.0, 0.5, curve: -4); env = EnvGen.ar(pluckEnv, gate: gate, doneAction: 2); sineSig = SinOsc.ar(freq); noise = WhiteNoise.ar; filteredNoise = BPF.ar(noise, freq, rq); sig = ((sineSig * (1 - noiseMix)) + (filteredNoise * noiseMix)) * amp * env; Out.ar(out, sig ! 2); }"
+}
