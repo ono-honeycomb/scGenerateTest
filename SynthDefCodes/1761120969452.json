@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "WarmPad",
+  "discription": "温かいパッドサウンド。ゆっくりとしたアタックとリリース、そして揺らぐフィルターが特徴です。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=2000, rq=0.5; var sig, env, filterCutoffMod; env = EnvGen.ar( Env.adsr(2.0, 3.0, 0.7, 5.0, curve: -4), gate: gate, doneAction: 2 ); filterCutoffMod = LFSaw.kr(0.1).range(0.8, 1.2); sig = Saw.ar(freq); sig = LPF.ar(sig, cutoff * filterCutoffMod, rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
