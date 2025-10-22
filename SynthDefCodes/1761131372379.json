@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "WarmDetunedSawPad",
+  "discription": "A warm, evolving pad sound created from two detuned sawtooth oscillators, passed through a resonant low-pass filter with subtle modulation, and shaped by a long ADSR envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=3000, rq=0.5, detuneAmt=0.005, vibratoRate=4, vibratoDepth=0.003; var sig1, sig2, sigMix; var env = EnvGen.ar( Env.adsr(attackTime: 1.5, decayTime: 2.0, sustainLevel: 0.7, releaseTime: 8.0, curve: -4), gate: gate, doneAction: 2 ); var vibrato = SinOsc.kr(vibratoRate) * vibratoDepth; sig1 = Saw.ar(freq * (1 + vibrato)); sig2 = Saw.ar(freq * (1 + detuneAmt) * (1 + vibrato)); sigMix = (sig1 + sig2) * 0.5; var lfoCutoff = LFSaw.kr(0.05).range(0, 1); var filterCutoff = cutoff + (lfoCutoff * 1000); sigMix = RLPF.ar(sigMix, filterCutoff.clip(50, 18000), rq); sigMix = sigMix * amp * env; Out.ar(out, sigMix ! 2); }"
+}
