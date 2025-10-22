@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimpleBell",
+  "discription": "A bell-like sound created by combining multiple sine waves with slightly detuned frequencies and a percussive decay envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, sustain=2.0;var sig, env;env = EnvGen.ar(Env.perc(0.01, sustain, curve: -4), gate: gate, doneAction: 2);var s1 = SinOsc.ar(freq);var s2 = SinOsc.ar(freq * 1.503);var s3 = SinOsc.ar(freq * 2.007);sig = (s1 * 0.8 + s2 * 0.5 + s3 * 0.3);sig = sig * amp * env;sig = Pan2.ar(sig, pan);Out.ar(out, sig);}"
+}
