@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SawPad",
+  "discription": "A warm saw wave pad sound with a gentle ADSR envelope and a low-pass filter.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=8000, rq=0.5; var sig; var env = EnvGen.ar( Env.adsr(0.5, 1.0, 0.7, 2.0, curve: -4), gate: gate, doneAction: 2 ); sig = Saw.ar(freq); sig = RLPF.ar(sig, cutoff, rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
