@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SoftBell",
+  "discription": "A gentle, decaying bell-like sound using two detuned sine waves and a dynamic low-pass filter.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=1.007, attack=0.01, decay=2.0, sustain=0.0, release=1.0, curve=-4, cutoff=2000; var sig, env; env = EnvGen.ar(Env.adsr(attack, decay, sustain, release, curve: curve), gate: gate, doneAction: 2); var osc1 = SinOsc.ar(freq); var osc2 = SinOsc.ar(freq * detune); sig = (osc1 + osc2) * 0.5; sig = LPF.ar(sig, cutoff + (EnvGen.ar(Env.perc(0.01, 0.5)) * 1000)); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
