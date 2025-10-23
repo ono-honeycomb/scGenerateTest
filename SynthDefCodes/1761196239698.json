@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulseDetuneSynth",
+  "discription": "A basic pulse wave synthesizer with two slightly detuned oscillators for a richer, thicker sound, controlled by an ADSR envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, detune=1.005; var sig1, sig2, sig; var env = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); sig1 = Pulse.ar(freq, pulseWidth); sig2 = Pulse.ar(freq * detune, pulseWidth); sig = (sig1 + sig2) * 0.5 * amp * env; Out.ar(out, sig ! 2); }"
+}
