@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimplePad",
+  "discription": "A basic pad sound using two detuned saw waves and a resonant low-pass filter with an envelope. Features adjustable ADSR for amplitude and a separate envelope for filter cutoff modulation.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, atk=0.5, dec=1.0, sus=0.7, rel=2.0, curve=-4, filterCutoff=3000, filterRes=0.2, filterEnvAmt=2000;    var sig;    var env = EnvGen.ar(        Env.adsr(atk, dec, sus, rel, curve: curve),        gate: gate,        doneAction: 2    );    var filterEnv = EnvGen.ar(        Env.adsr(0.1, 0.5, 0.5, 0.8),        gate: gate    );    var saw1 = Saw.ar(freq);    var saw2 = Saw.ar(freq * 1.005);    sig = (saw1 + saw2) * 0.5;    sig = RLPF.ar(sig, filterCutoff + (filterEnv * filterEnvAmt), filterRes);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
