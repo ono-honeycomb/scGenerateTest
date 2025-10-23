@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckyBell",
+  "discription": "A percussive, bell-like sound using a sine wave with a quick decay envelope and a touch of frequency modulation.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, releaseTime=0.8, fmDepth=0.1, fmRatio=3;    var sig, env;    env = EnvGen.ar(        Env.perc(0.005, releaseTime, curve: -4),        gate: gate,        doneAction: 2    );    var mod = SinOsc.ar(freq * fmRatio, 0, freq * fmDepth);    sig = SinOsc.ar(freq + mod) * amp * env;    Out.ar(out, sig ! 2);}"
+}
