@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulseFilterSweep",
+  "discription": "A pulse wave with a resonant low-pass filter whose cutoff frequency is modulated by an LFO, creating a sweeping effect.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, width=0.5, rq=0.5, lfoFreq=0.5, filterCutoff=1000, filterSweepDepth=0.5; var sig, env, lfoValue, cutoff; env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2); lfoValue = SinOsc.kr(lfoFreq) * filterSweepDepth; cutoff = filterCutoff * (1 + lfoValue); cutoff = cutoff.max(50).min(20000); sig = Pulse.ar(freq, width); sig = RLPF.ar(sig, cutoff, rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
