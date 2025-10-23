@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsarPad",
+  "discription": "A soft, evolving pad sound using a pulse oscillator with a modulated low-pass filter and a long release envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, cutoff=2000, rq=0.5, atk=2.0, dec=1.5, sus=0.6, rel=5.0; var sig, env, filterFreq; env = EnvGen.ar( Env.adsr(atk, dec, sus, rel, curve: -4), gate: gate, doneAction: 2 ); sig = Pulse.ar(freq, pulseWidth); filterFreq = LFTri.kr(0.1, 0, 500, cutoff); sig = RLPF.ar(sig, filterFreq, rq) * amp * env; Out.ar(out, sig ! 2); }"
+}
