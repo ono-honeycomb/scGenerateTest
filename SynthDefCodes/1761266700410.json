@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSawPad",
+  "discription": "A warm, slowly evolving pad sound created using two slightly detuned saw waves with a long attack and release envelope, suitable for sustained atmospheric textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detuneAmount=0.005; var sig1, sig2, sig; var env = EnvGen.ar( Env.adsr(2.0, 1.0, 0.8, 3.0, curve: -2), gate: gate, doneAction: 2 ); sig1 = Saw.ar(freq); sig2 = Saw.ar(freq * (1 + detuneAmount)); sig = (sig1 + sig2) * 0.5 * amp * env; Out.ar(out, sig ! 2); }"
+}
