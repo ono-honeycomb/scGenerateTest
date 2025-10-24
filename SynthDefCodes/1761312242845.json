@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PWMPluck",
+  "discription": "A percussive, plucked sound using a pulse wave with pulse width modulation and a fast envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, pwRate=2;    var sig;    var env = EnvGen.ar(        Env.adsr(0.005, 0.1, 0.5, 0.5, curve: -4),        gate: gate,        doneAction: 2    );    var pwMod = SinOsc.kr(pwRate).range(0.1, 0.9);    sig = Pulse.ar(freq, pwMod);    var filterFreq = EnvGen.ar(        Env.linen(0.01, 0.1, 0.2, 8000, 200, curve: 'exp'),        gate: gate,        doneAction: 0    );    sig = LPF.ar(sig, filterFreq);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
