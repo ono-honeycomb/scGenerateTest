@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSaw",
+  "discription": "Two slightly detuned saw wave oscillators combine to create a fuller, richer sound with a classic ADSR envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.7;    var sig, sig1, sig2;    var env = EnvGen.ar(        Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),        gate: gate,        doneAction: 2    );    sig1 = Saw.ar(freq);    sig2 = Saw.ar(freq + detune);    sig = (sig1 + sig2) * 0.5 * amp * env;    Out.ar(out, sig ! 2);}"
+}
