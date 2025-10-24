@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSaw",
+  "discription": "A rich, detuned saw wave synth with a classic ADSR envelope, creating a fuller and wider sound.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, attack=0.01, decay=0.1, sustain=0.8, release=1.0, curve=-4; var sig; var env = EnvGen.ar(Env.adsr(attack, decay, sustain, release, curve: curve), gate: gate, doneAction: 2); var saw1 = Saw.ar(freq); var saw2 = Saw.ar(freq * (1 + detune)); var saw3 = Saw.ar(freq * (1 - detune * 0.5)); sig = (saw1 + saw2 + saw3) / 3; sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
