@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredPulse",
+  "discription": "パルス波をベースにした音色。ADSRエンベロープ、LFOによるパルス幅変調、そしてエンベロープに追従するレゾナントローパスフィルターを特徴とします。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, pwLfoFreq=0, rq=0.5, cutoff=4000; var sig; var env = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); var pwMod = LinXFade2.ar( DC.ar(pulseWidth), LFPulse.ar(pwLfoFreq, 0, 0.5) * 0.4 + 0.1, K2A.ar(pwLfoFreq.abs > 0.001) ); sig = LFPulse.ar(freq, 0, pwMod); var filterCutoff = cutoff * env.linlin(0, 1, 0.5, 1.5).max(0.01); sig = RLPF.ar(sig, filterCutoff, rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
