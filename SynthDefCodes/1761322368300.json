@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulseLead",
+  "discription": "A bright, detuned pulse wave lead synth with a filter and ADSR envelope, allowing for dynamic timbre changes via pulse width modulation.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, cutoff=3000, rq=0.5; var sig; var env = EnvGen.ar(Env.adsr(0.01, 0.15, 0.7, 0.5, curve: -4), gate: gate, doneAction: 2); sig = Pulse.ar(freq * [1, 1.008], pulseWidth.lag(0.01)); sig = RLPF.ar(sig, cutoff.lag(0.01), rq); sig = sig.sum * amp * env; Out.ar(out, sig ! 2); }"
+}
