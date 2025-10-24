@@ -1,0 +1,1 @@
+{"SynthDefName": "PluckySine", "discription": "短くパーカッシブなサイン波の音色です。アタックが速く、減衰が短めのアタックディケイエンベロープを使用しています。", "code": "{ arg out=0, freq=440, amp=0.1, gate=1;    var sig;    var env = EnvGen.ar(        Env.perc(0.005, 0.2),        gate: gate,        doneAction: 2    );    sig = SinOsc.ar(freq) * amp * env;    Out.ar(out, sig ! 2);} "}
