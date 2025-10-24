@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMSynthBasic",
+  "discription": "シンプルなFMシンセサイザー。キャリアとモジュレーターの周波数比とモジュレーションインデックスを調整可能。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, carRatio=1, modRatio=1.414, modIndex=1.5;    var sig, env, modFreq, modSig;    env = EnvGen.ar(        Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),        gate: gate,        doneAction: 2    );    modFreq = freq * modRatio;    modSig = SinOsc.ar(modFreq) * (modFreq * modIndex);    sig = SinOsc.ar(freq * carRatio + modSig) * amp * env;    Out.ar(out, sig ! 2);}"
+}
