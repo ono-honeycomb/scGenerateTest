@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "Bell",
+  "discription": "Inharmonic sine wave partials with a percussive envelope to create a bell-like sound.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1; var sig, env; env = EnvGen.ar( Env.perc(0.005, 2.0, curve: -4), gate: gate, doneAction: 2 ); sig = SinOsc.ar(freq) * 0.6; sig = sig + (SinOsc.ar(freq * 2.01) * 0.4); sig = sig + (SinOsc.ar(freq * 3.02) * 0.2); sig = sig + (SinOsc.ar(freq * 4.03) * 0.1); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
