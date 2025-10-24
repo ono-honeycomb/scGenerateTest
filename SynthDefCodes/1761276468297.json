@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "BellSynth",
+  "discription": "複数のデチューンされたサイン波とパーカッシブなエンベロープを用いた、シンプルなベルのような音色です。速いアタックと減衰が特徴です。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, decay=2.0; var sig; var env = EnvGen.ar(Env.perc(0.01, decay), gate: gate, doneAction: 2); var sig1 = SinOsc.ar(freq); var sig2 = SinOsc.ar(freq * 2.01); var sig3 = SinOsc.ar(freq * 3.01); var sig4 = SinOsc.ar(freq * 4.02); sig = (sig1 * 0.6 + sig2 * 0.3 + sig3 * 0.15 + sig4 * 0.05) * amp * env; Out.ar(out, sig ! 2); }"
+}
