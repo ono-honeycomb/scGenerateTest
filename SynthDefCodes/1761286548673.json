@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PercussiveNoise",
+  "discription": "A short, percussive noise burst with a resonant filter, suitable for drum sounds.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5; var sig, env; env = EnvGen.ar(Env.perc(0.001, 0.5, curve: -4), gate: gate, doneAction: 2); sig = PinkNoise.ar(amp); sig = RLPF.ar(sig, freq, rq); sig = sig * env; Out.ar(out, sig ! 2); }"
+}
