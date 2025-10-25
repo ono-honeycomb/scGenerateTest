@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PWMPluck",
+  "discription": "A plucky pulse wave synth with pulse width modulation (PWM) and a fast envelope, suitable for percussive or plucked sounds.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, pwmRate=2; var sig; var env = EnvGen.ar(Env.adsr(0.001, 0.15, 0.0, 0.5, curve: -4), gate: gate, doneAction: 2); var pwMod = SinOsc.kr(pwmRate) * 0.4 + pulseWidth; sig = Pulse.ar(freq, pwMod); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
