@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsePad",
+  "discription": "ゆったりとしたエンベロープとローパスフィルターを備えた、メロウなパルス波のパッドサウンドです。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoff=2000; var sig, env; env = EnvGen.ar( Env.adsr(0.5, 1.0, 0.7, 5.0, curve: -2), gate: gate, doneAction: 2 ); sig = Pulse.ar(freq, 0.5); sig = RLPF.ar(sig, cutoff, rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
