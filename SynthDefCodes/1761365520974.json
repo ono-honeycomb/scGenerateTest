@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "BellRing",
+  "discription": "A clear bell-like tone created by combining two sine waves with slightly detuned frequencies and a fast, percussive envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1; var sig; var env = EnvGen.ar( Env.perc(0.01, 1.5, 1.0, curve: -4), gate: gate, doneAction: 2 ); var sig1 = SinOsc.ar(freq); var sig2 = SinOsc.ar(freq * 1.007); sig = (sig1 + sig2) * 0.5 * amp * env; Out.ar(out, sig ! 2); }"
+}
