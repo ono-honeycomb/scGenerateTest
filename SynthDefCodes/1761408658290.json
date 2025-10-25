@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "Bell",
+  "discription": "A clean, bell-like tone using three sine waves with inharmonic ratios and a fast decaying envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1; var sig; var env = EnvGen.ar( Env.adsr(0.001, 0.5, 0.0, 0.5, curve: -4), gate: gate, doneAction: 2 ); var osc1 = SinOsc.ar(freq); var osc2 = SinOsc.ar(freq * 2.5); var osc3 = SinOsc.ar(freq * 3.5); sig = (osc1 * 0.8 + osc2 * 0.4 + osc3 * 0.2) * amp * env; Out.ar(out, sig ! 2); }"
+}
