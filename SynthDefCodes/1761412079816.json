@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimplePad",
+  "discription": "A warm and sustained pad sound, created with detuned sine waves for richness and a long ADSR envelope for a smooth attack and release.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005; var sig, env; env = EnvGen.ar(Env.adsr(0.5, 1.0, 0.7, 2.0, curve: -4), gate: gate, doneAction: 2); var s1 = SinOsc.ar(freq); var s2 = SinOsc.ar(freq * (1 + detune)); var s3 = SinOsc.ar(freq * (1 - detune)); sig = (s1 + s2 + s3) / 3; sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
