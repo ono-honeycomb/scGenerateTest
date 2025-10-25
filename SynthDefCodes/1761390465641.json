@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "WarmPad",
+  "discription": "A warm, evolving pad sound using detuned saw waves and a low-pass filter, suitable for background textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, attack=2.0, decay=2.0, sustain=0.7, release=3.0, filterFreq=5000, rq=0.5, detune=0.005; var sig, env, saw1, saw2, filteredSig; env = EnvGen.ar( Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2 ); saw1 = Saw.ar(freq); saw2 = Saw.ar(freq * (1 + detune)); sig = (saw1 + saw2) * 0.5; filteredSig = LPF.ar(sig, filterFreq, rq); Out.ar(out, (filteredSig * amp * env) ! 2); }"
+}
