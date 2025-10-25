@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedPulse",
+  "discription": "A detuned pulse wave with an ADSR envelope for a thicker, more 'analog' sound. Parameters for pulse width and detune are included.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, detune=0.005; var sigA, sigB, sig; var env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2); sigA = Pulse.ar(freq, pulseWidth); sigB = Pulse.ar(freq * (1 + detune), pulseWidth); sig = (sigA + sigB) * 0.5 * amp * env; Out.ar(out, sig ! 2); }"
+}
