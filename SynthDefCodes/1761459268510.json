@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsarPad",
+  "discription": "A soft, evolving pad sound using detuned saw waves and a resonant low-pass filter, enveloped by a long attack-decay envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, pan=0; var sig, env, lfo, cutoff; env = EnvGen.ar(Env.adsr(4.0, 3.0, 0.7, 8.0, curve: -4), gate: gate, doneAction: 2); lfo = SinOsc.kr(0.1).range(0, 1); cutoff = LFSaw.kr(0.05).range(freq * 0.5, freq * 4) * lfo; sig = Mix.new([Saw.ar(freq * 0.99), Saw.ar(freq * 1.01), Saw.ar(freq * 1.005)]); sig = RLPF.ar(sig, cutoff.max(100), rq); sig = sig * env * amp; Out.ar(out, Pan2.ar(sig, pan)); }"
+}
