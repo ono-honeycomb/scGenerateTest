@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "BasicFM",
+  "discription": "A simple Frequency Modulation (FM) synthesis sound, suitable for bell-like or metallic tones.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, carRatio=1, modRatio=1, modIndex=1;    var sig, env;    env = EnvGen.ar(        Env.adsr(0.01, 0.2, 0.7, 0.5, curve: -4),        gate: gate,        doneAction: 2    );    var modulator = SinOsc.ar(freq * modRatio) * (freq * modIndex);    var carrier = SinOsc.ar(freq * carRatio + modulator);    sig = carrier * amp * env;    Out.ar(out, sig ! 2);}"
+}
