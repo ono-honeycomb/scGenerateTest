@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMSynthPad",
+  "discription": "A simple FM synthesis pad sound with an ADSR envelope. It uses two sine oscillators for carrier and modulator, with parameters for modulation ratio and index.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, carrierRatio=1, modRatio=1.5, modIndex=1.0;var sig, mod;var env = EnvGen.ar(Env.adsr(0.5, 1.0, 0.7, 2.0, curve: -4),gate: gate,doneAction: 2);mod = SinOsc.ar(freq * modRatio) * (freq * modIndex);sig = SinOsc.ar(freq * carrierRatio + mod) * amp * env;Out.ar(out, sig ! 2);}"
+}
