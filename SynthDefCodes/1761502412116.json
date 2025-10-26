@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsePad",
+  "discription": "脈動感のあるパッドサウンド。パルス波形をローパスフィルターに通し、そのカットオフ周波数をLFOでわずかに変調することで、ゆったりとした動きと温かみのある音色を生成します。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, cutoff=4000, rq=0.5, lfoRate=0.1, lfoDepth=0.2;    var sig, env, lfo;    env = EnvGen.ar(        Env.adsr(0.5, 1.0, 0.7, 2.0, curve: -4),        gate: gate,        doneAction: 2    );    lfo = SinOsc.kr(lfoRate).range(1 - lfoDepth, 1 + lfoDepth);    sig = Pulse.ar(freq, pulseWidth);    sig = LPF.ar(sig, cutoff * lfo);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
