@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSawFilterPad",
+  "discription": "デチューンされた2つのノコギリ波をローパスフィルターに通し、ADSRエンベロープで制御するパッド系の音色です。わずかなデチューンが厚みと動きを与えます。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=4000, rq=0.5, detune=1.005;    var sig, env, saw1, saw2, filteredSig;    env = EnvGen.ar(        Env.adsr(0.5, 0.8, 0.6, 2.0, curve: -4),        gate: gate,        doneAction: 2    );    saw1 = Saw.ar(freq);    saw2 = Saw.ar(freq * detune);    sig = (saw1 * 0.5) + (saw2 * 0.5);    filteredSig = RLPF.ar(sig, cutoff, rq);    Out.ar(out, (filteredSig * amp * env) ! 2);}"
+}
