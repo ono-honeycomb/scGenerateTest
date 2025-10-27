@@ -1,0 +1,1 @@
+{"SynthDefName":"PluckedBell","discription":"A short, percussive bell-like sound with a decaying envelope.","code":"{ arg out=0, freq=440, amp=0.1, gate=1, decayTime=0.5; var sig; var env = EnvGen.ar(Env.perc(0.001, decayTime), gate: gate, doneAction: 2); sig = SinOsc.ar(freq * [1.0, 1.007]); sig = sig * env * amp; Out.ar(out, sig.sum * 0.5 ! 2); }"}
