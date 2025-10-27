@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "AmbientPad",
+  "discription": "A rich, evolving pad sound with a slowly sweeping filter and built-in reverberation.",
+  "code": "{ arg out=0, freq=88, amp=0.1, gate=1, attack=4, sustain=8, release=6, pan=0;    var sig, env, lfo, cutoff, wetDry;    env = EnvGen.ar(        Env.adsr(attack, sustain, 0.6, release, curve: -2),        gate: gate,        doneAction: 2    );    sig = Saw.ar(freq * [0.99, 1.01]) * 0.5;    lfo = LFSaw.kr(0.05).range(0.1, 0.9);    cutoff = (freq * 10) * lfo;    sig = RLPF.ar(sig, cutoff.clip(50, 8000), 0.3);    sig = sig * amp * env;    wetDry = 0.6;    sig = sig + GVerb.ar(sig, roomsize: 10, revtime: 15, damping: 0.5, inputbw: 0.5, spread: 15, drylevel: 0.5, earlyreflevel: 0.5, taillevel: 0.5) * wetDry;    Out.ar(out, Pan2.ar(sig, pan));}"
+}
