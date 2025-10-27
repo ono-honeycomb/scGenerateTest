@@ -1,0 +1,5 @@
+{
+    "SynthDefName": "FilteredSawLead",
+    "discription": "A bright sawtooth lead sound with a resonant low-pass filter and an ADSR amplitude envelope. Useful for lead lines or pads.",
+    "code": "{ arg out=0, freq=440, amp=0.1, gate=1, attack=0.01, decay=0.1, sustain=0.7, release=0.8, cutoff=4000, rq=0.5;    var sig;    var env = EnvGen.ar(        Env.adsr(attack, decay, sustain, release, curve: -4),        gate: gate,        doneAction: 2    );    sig = Saw.ar(freq);    sig = RLPF.ar(sig, cutoff, rq);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
