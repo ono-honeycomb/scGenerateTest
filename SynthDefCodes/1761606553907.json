@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckBell",
+  "discription": "A bell-like plucked sound created with a combination of sine waves and a short percussive envelope, perfect for melodic accents.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, sustain=0.01, decay=0.5; var sig; var env = EnvGen.ar(Env.perc(sustain, decay), gate: gate, doneAction: 2); sig = (SinOsc.ar(freq) * 0.7 + SinOsc.ar(freq * 1.5) * 0.3) * amp * env; Out.ar(out, sig ! 2); }"
+}
