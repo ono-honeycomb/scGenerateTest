@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimpleFM",
+  "discription": "A basic FM synth with an ADSR envelope and adjustable modulation index and frequency ratio.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, modIndex=1.0, modFreqRatio=1.0;var car, modOsc, sig;var env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),gate: gate,doneAction: 2);modOsc = SinOsc.ar(freq * modFreqRatio);car = SinOsc.ar(freq + (modOsc * modIndex * freq));sig = car * amp * env;Out.ar(out, sig ! 2);}"
+}
