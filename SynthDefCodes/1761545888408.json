@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimpleBell",
+  "discription": "Two sine waves with slightly different frequencies and decay envelopes to simulate a bell-like, percussive sound. 'brightRatio' controls the second sine wave's frequency relationship to the main frequency, and 'decayTime' sets the overall decay duration.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, brightRatio=1.5, decayTime=2.0; var sig, mainEnv, brightEnv; mainEnv = EnvGen.ar(Env.perc(0.01, decayTime, amp, curve: -4), gate: gate, doneAction: 2); brightEnv = EnvGen.ar(Env.perc(0.01, decayTime * 0.5, amp * 0.5, curve: -4), gate: gate, doneAction: 2); sig = SinOsc.ar(freq) * mainEnv; sig = sig + (SinOsc.ar(freq * brightRatio) * brightEnv); Out.ar(out, sig ! 2); }"
+}
