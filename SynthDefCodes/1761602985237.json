@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsePad",
+  "discription": "A mellow pulse wave pad sound with a low-pass filter and ADSR envelope, suitable for sustained chords or atmospheric textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, rq=0.5; var sig, env; env = EnvGen.ar( Env.adsr(0.01, 0.5, 0.7, 1.0, curve: -4), gate: gate, doneAction: 2 ); sig = Pulse.ar(freq, pulseWidth); sig = RLPF.ar(sig, freq * 2, rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
