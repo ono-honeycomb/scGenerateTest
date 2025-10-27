@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSine",
+  "discription": "Two slightly detuned sine waves with a low-pass filter and ADSR envelope, creating a warm, slightly chorused sound.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, lpfCutoff=2000, lpfRes=0.5;    var sig, env;    env = EnvGen.ar(        Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),        gate: gate,        doneAction: 2    );    sig = SinOsc.ar(freq);    sig = sig + SinOsc.ar(freq * (1 + detune));    sig = RLPF.ar(sig, lpfCutoff, lpfRes);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
