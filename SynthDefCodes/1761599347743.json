@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSynth",
+  "discription": "弦を弾いたような音色です。Pluck UGenを使用し、減衰の速いエンベロープで瞬発的な音を表現します。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, decay=2.0;    var sig;    var env = EnvGen.ar(        Env.adsr(0.001, 0.1, 0.5, 0.5, curve: -4),        gate: gate,        doneAction: 2    );    var impulse = Impulse.ar(0);    sig = Pluck.ar(impulse, in: 0, trig: K2A.ar(gate), maxdelaytime: 0.1, delaytime: 1/freq, decaytime: decay, coef: 0.5);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
