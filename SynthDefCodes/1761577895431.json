@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredSawPluck",
+  "discription": "ゲートによってトリガーされる、フィルタリングされたノコギリ波による減衰音です。短いアタックと減衰、そしてエンベロープでモジュレーションされるローパスフィルターにより、木琴のようなアタック感のある、またはパーカッシブなパッドのような音色を生成します。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, filterBaseFreq=2000;\n    var sig, env;\n    env = EnvGen.ar(\n        Env.adsr(0.005, 0.1, 0.7, 0.5, curve: -4), \n        gate: gate,\n        doneAction: 2\n    );\n    sig = Saw.ar(freq);\n    sig = LPF.ar(sig, filterBaseFreq + (env * 2000), rq);\n    sig = sig * amp * env;\n    Out.ar(out, sig ! 2);\n}"
+}
