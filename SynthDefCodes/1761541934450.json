@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSaw",
+  "discription": "A simple plucked saw wave sound with a percussive envelope, suitable for short, sharp tones.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, attack=0.005, release=0.5; var sig; var env = EnvGen.ar(Env.perc(attack, release), gate: gate, doneAction: 2); sig = Saw.ar(freq) * amp * env; Out.ar(out, Pan2.ar(sig, pan)); }"
+}
