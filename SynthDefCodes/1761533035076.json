@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "WarmPad",
+  "discription": "A warm, evolving pad sound created with two detuned sine waves and a slow ADSR envelope, suitable for ambient textures. It features customizable attack, decay, sustain, and release times, as well as a detune amount for richer harmonics.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, attack=4.0, decay=1.0, sustain=0.6, release=5.0; var sig1, sig2, sig, env; env = EnvGen.ar(Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2); sig1 = SinOsc.ar(freq * (1 - detune)); sig2 = SinOsc.ar(freq * (1 + detune)); sig = (sig1 + sig2) * 0.5 * amp * env; Out.ar(out, sig ! 2); }"
+}
