@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SoftPluck",
+  "discription": "A gentle plucked string or bell-like sound, characterized by a quick decay and a low-pass filter that softens the initial attack, creating a mellow timbre.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, attack=0.01, decay=0.5, rq=0.5; var sig; var env = EnvGen.ar( Env.perc(attack, decay, curve: -4), gate: gate, doneAction: 2 ); sig = Saw.ar(freq); sig = LPF.ar(sig, (freq * 4) + (env * freq * 10), rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
