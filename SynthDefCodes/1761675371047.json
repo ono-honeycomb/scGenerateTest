@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SawPad",
+  "discription": "Warm saw wave pad with a slow attack and subtle detune for a wide stereo sound.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, atk=2.0, dec=2.0, sus=0.7, rel=3.0, detune=0.001;    var sigL, sigR;    var env = EnvGen.ar(        Env.adsr(atk, dec, sus, rel, curve: -4),        gate: gate,        doneAction: 2    );    sigL = Saw.ar(freq);    sigR = Saw.ar(freq * (1 + detune));    var sig = Mix.new([sigL, sigR]);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
