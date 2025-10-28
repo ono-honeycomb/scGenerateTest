@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "BasicSaw",
+  "discription": "A simple saw wave synthesizer with an ADSR envelope, allowing control over attack, decay, sustain, and release phases.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, attack=0.01, decay=0.1, sustain=0.8, release=1.0;    var sig;    var env = EnvGen.ar(        Env.adsr(attack, decay, sustain, release, curve: -4),        gate: gate,        doneAction: 2    );    sig = Saw.ar(freq) * amp * env;    Out.ar(out, sig ! 2);}"
+}
