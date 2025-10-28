@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedPad",
+  "discription": "A warm pad sound created by two slightly detuned sine waves, enveloped with a slow attack and release for a smooth, sustained texture.",
+  "code": "{ arg out=0, freq=220, amp=0.1, gate=1, detune=0.005;var sig1, sig2, sig;var env = EnvGen.ar(Env.adsr(1.0, 0.5, 0.7, 2.0, curve: -4),gate: gate,doneAction: 2);sig1 = SinOsc.ar(freq);sig2 = SinOsc.ar(freq * (1 + detune));sig = (sig1 + sig2) * 0.5 * amp * env;Out.ar(out, sig ! 2);}"
+}
