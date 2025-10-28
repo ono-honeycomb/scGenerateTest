@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulseSynth",
+  "discription": "A simple pulse wave synth with ADSR envelope and subtle pulse width modulation.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, pwModDepth=0.1, lfoFreq=0.5;    var sig;    var env = EnvGen.ar(        Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),        gate: gate,        doneAction: 2    );    var pwMod = SinOsc.kr(lfoFreq) * pwModDepth;    var currentPW = pulseWidth + pwMod;    sig = Pulse.ar(freq, currentPW.clip(0.01, 0.99)) * amp * env;    Out.ar(out, sig ! 2);}"
+}
