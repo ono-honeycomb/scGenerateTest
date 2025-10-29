@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMBell",
+  "discription": "A classic FM bell sound using two sine oscillators with a short, exponential decay envelope, suitable for percussive melodic elements.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, carRatio=1.0, modRatio=1.4, modIndex=1.5, atk=0.01, rel=1.0, curve=(-4);var sig, mod, env;env = EnvGen.ar(Env.adsr(atk, 0.0, 1.0, rel, curve: curve),gate: gate,doneAction: 2);mod = SinOsc.ar(freq * modRatio) * (freq * modIndex);sig = SinOsc.ar(freq * carRatio + mod) * amp * env;Out.ar(out, sig ! 2);}"
+}
