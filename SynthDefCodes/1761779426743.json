@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SoftBell",
+  "discription": "A soft, bell-like percussive sound with multiple decaying sine waves and a touch of resonance.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5; var sig, env; env = EnvGen.ar(Env.perc(0.01, 0.5, curve: -4), gate: gate, doneAction: 2); sig = SinOsc.ar(freq * [1.0, 1.005, 2.00]) * [0.8, 0.5, 0.2]; sig = sig.sum; sig = RLPF.ar(sig, (freq * 2) * env.linlin(0, 1, 0.5, 1.5).clip(0.1, 1.0), rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
