@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckBell",
+  "discription": "二つのわずかにデチューンされたサイン波を組み合わせ、素早いパーカッシブなエンベロープを持つ、ベルのようなプラックサウンドです。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1; var sig; var env = EnvGen.ar(Env.perc(0.01, 0.5), gate: gate, doneAction: 2); var s1 = SinOsc.ar(freq); var s2 = SinOsc.ar(freq * 1.01); sig = (s1 + s2) * 0.5 * amp * env; Out.ar(out, sig ! 2); }"
+}
