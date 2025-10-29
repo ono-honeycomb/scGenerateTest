@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredSaw",
+  "discription": "A resonant saw wave sound with an amplitude ADSR envelope and a separate envelope controlling the low-pass filter cutoff frequency, creating a subtle filter sweep effect.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1; var sig, env, filterEnv, cutoff; env = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); filterEnv = EnvGen.ar( Env.perc(0.01, 0.2), gate: gate ); sig = Saw.ar(freq); cutoff = LinExp.kr(filterEnv, 0, 1, 100, 8000); sig = RLPF.ar(sig, cutoff, 0.2); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
