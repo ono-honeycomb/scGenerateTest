@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FM_Bell",
+  "discription": "Simple FM synthesis bell sound with an ADSR envelope. It uses FSinOsc for a classic FM timbre.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, carrierRatio=1.0, modulatorRatio=1.4, modulationIndex=5.0, attack=0.005, decay=0.1, sustain=0.8, release=1.0, curve=-4; var sig, env; env = EnvGen.ar( Env.adsr(attack, decay, sustain, release, curve: curve), gate: gate, doneAction: 2 ); sig = FSinOsc.ar( freq: freq * carrierRatio, modfreq: freq * modulatorRatio, modindex: modulationIndex ); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
