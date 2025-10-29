@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSynth",
+  "discription": "A simple, percussive pluck sound generated with a pulse wave and a short percussion envelope, filtered by a low-pass filter.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, cutoff=4000;    var sig;    var env = EnvGen.ar(        Env.perc(0.01, 0.3),        gate: gate,        doneAction: 2    );    sig = Pulse.ar(freq, pulseWidth);    sig = LPF.ar(sig, cutoff);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
