@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "MellowPulsePad",
+  "discription": "A soft and evolving pulse wave pad sound, featuring a slow ADSR envelope and a resonant low-pass filter for warmth and character. The pulse width can be modulated for timbral variation.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoff=3000, pulseWidth=0.5;\\n    var sig, env;\\n    env = EnvGen.ar(\\n        Env.adsr(0.8, 1.2, 0.6, 2.5, curve: -4),\\n        gate: gate,\\n        doneAction: 2\\n    );\\n    sig = Pulse.ar(freq, pulseWidth) * amp * env;\\n    sig = RLPF.ar(sig, cutoff, rq);\\n    Out.ar(out, sig ! 2);\\n}"
+}
