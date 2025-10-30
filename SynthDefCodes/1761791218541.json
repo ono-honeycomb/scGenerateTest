@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimpleBell",
+  "discription": "きらめくような、短い減衰のベルのような音色です。サイン波を複数重ね、パーカッシブなエンベロープで仕上げています。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1; var sig, env; env = EnvGen.ar(Env.perc(0.001, 1.0, curve: -4), gate: gate, doneAction: 2); sig = SinOsc.ar(freq * 1.0) * 0.7; sig = sig + (SinOsc.ar(freq * 2.001) * 0.2); sig = sig + (SinOsc.ar(freq * 3.002) * 0.1); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
