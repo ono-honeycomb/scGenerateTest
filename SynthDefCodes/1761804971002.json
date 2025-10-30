@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PadSynth",
+  "discription": "A warm, evolving pad sound using detuned Sawtooth oscillators and a resonant low-pass filter whose cutoff is modulated by the envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoff=3000, pan=0;var sig, env;env = EnvGen.ar(Env.adsr(2.0, 3.0, 0.7, 5.0, curve: -4), gate: gate, doneAction: 2);sig = Saw.ar(freq * [1.0, 1.002]) * amp * env;sig = RLPF.ar(sig, cutoff * env.explin(0,1,0.5,1), rq);sig = Pan2.ar(sig, pan);Out.ar(out, sig);}"
+}
