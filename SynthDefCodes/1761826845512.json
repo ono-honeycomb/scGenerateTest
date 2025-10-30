@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "Plucky",
+  "discription": "短くパーカッシブなアタックと素早い減衰を持つ、プラッキーな音色です。弦のピチカートや短い木琴のようなサウンドに適しています。",
+  "code": "{ arg out=0, freq=440, amp=0.2, gate=1;    var sig;    var env = EnvGen.ar(        Env.adsr(0.001, 0.05, 0.0, 0.3, curve: -4),        gate: gate,        doneAction: 2    );    sig = SinOsc.ar(freq * [1.0, 1.005]) * amp * env;    Out.ar(out, sig);}"
+}
