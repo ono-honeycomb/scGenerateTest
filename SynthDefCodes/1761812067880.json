@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMSineBass",
+  "discription": "A simple FM bass synth using sine waves for carrier and modulator, with an ADSR envelope. Parameters for modulation ratio and index allow for a range of timbres from subtle to rich.",
+  "code": "{ arg out=0, freq=40, amp=0.2, gate=1, atk=0.01, dec=0.2, sus=0.7, rel=0.5, curve=-4, carrierRatio=1, modRatio=2, modIndex=10; var sig, env; env = EnvGen.ar(Env.adsr(atk, dec, sus, rel, curve: curve), gate: gate, doneAction: 2); var mod = SinOsc.ar(freq * modRatio) * (freq * modIndex); sig = SinOsc.ar(freq * carrierRatio + mod) * amp * env; Out.ar(out, sig ! 2); }"
+}
