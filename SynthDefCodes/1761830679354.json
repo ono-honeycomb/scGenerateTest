@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSawPad",
+  "discription": "A warm, detuned saw wave pad with a low-pass filter and an ADSR envelope, suitable for sustained atmospheric sounds.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, cutoff=4000, rq=0.5;    var sig, env;    var detuneFreq1 = freq * (1 + detune);    var detuneFreq2 = freq * (1 - detune);    env = EnvGen.ar(        Env.adsr(0.5, 1.0, 0.7, 2.0, curve: -4),         gate: gate,        doneAction: 2    );    sig = Saw.ar(freq) * 0.5 + Saw.ar(detuneFreq1) * 0.25 + Saw.ar(detuneFreq2) * 0.25;    sig = LPF.ar(sig, cutoff);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
