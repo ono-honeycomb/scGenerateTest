@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SimpleSawPad",
+  "discription": "A simple pad sound using a saw wave with a long release envelope and a low-pass filter, suitable for sustained textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, lpf=8000; var sig; var env = EnvGen.ar(Env.adsr(0.5, 2.0, 0.7, 5.0, curve: -4), gate: gate, doneAction: 2); sig = Saw.ar(freq) * amp * env; sig = RLPF.ar(sig, lpf, rq); Out.ar(out, sig ! 2); }"
+}
