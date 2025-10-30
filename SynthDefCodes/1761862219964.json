@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsePad",
+  "discription": "A warm, detuned pulse wave pad with an envelope-modulated low-pass filter, suitable for ambient textures. It features detuning for width and a resonant filter for dynamic timbre.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, pulseWidth=0.5, rq=0.5, cutoffBase=3000, cutoffEnvScale=1.5; var sig, env, filterFreq; var detunedFreq1 = freq * (1 - detune); var detunedFreq2 = freq * (1 + detune); env = EnvGen.ar( Env.adsr(0.5, 2.0, 0.7, 3.0, curve: -4), gate: gate, doneAction: 2 ); sig = Pulse.ar(detunedFreq1, pulseWidth) * 0.5; sig = sig + Pulse.ar(detunedFreq2, pulseWidth) * 0.5; filterFreq = cutoffBase + (cutoffBase * cutoffEnvScale * env); filterFreq = filterFreq.clip(100, 20000); sig = LPF.ar(sig, filterFreq, rq) * 2; sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
