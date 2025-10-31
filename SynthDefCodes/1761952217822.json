@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckBell",
+  "discription": "A bell-like plucked sound using an FM oscillator and a short, decaying envelope, passed through a resonant low-pass filter.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, attack=0.001, decay=1.0, sustain=0.0, release=0.1, curve=-4, rq=0.5, pan=0;    var sig, env;    env = EnvGen.ar(        Env.adsr(attack, decay, sustain, release, curve: curve),        gate: gate,        doneAction: 2    );    sig = SinOsc.ar(freq + (SinOsc.ar(freq * 1.5) * (freq * 0.5))) * 0.5;    sig = RLPF.ar(sig, freq * 4, rq);    sig = sig * amp * env;    Out.ar(out, Pan2.ar(sig, pan));}"
+}
