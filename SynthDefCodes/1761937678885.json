@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "BrightSquarePad",
+  "discription": "デチューンされた2つのパルス波をローパスフィルターで処理した、明るく持続的なパッドサウンドです。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, detune=0.005, cutoffRatio=4, rq=0.5;    var sig, env;    env = EnvGen.ar(        Env.adsr(0.5, 0.5, 0.7, 3.0, curve: -4),        gate: gate,        doneAction: 2    );    sig = Pulse.ar([freq, freq * (1 + detune)], 0.5);    sig = LPF.ar(sig, freq * cutoffRatio, rq);    sig = sig * amp * env;    sig = Pan2.ar(sig, pan);    Out.ar(out, sig);}"
+}
