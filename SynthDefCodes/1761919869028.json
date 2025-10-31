@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckySawFilter",
+  "discription": "A short, percussive saw wave with a decaying low-pass filter, suitable for bass or plucked melodies. The filter cutoff decays with the note.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=3000, rq=0.5, pan=0;var sig, env, filterEnv;env = EnvGen.ar(Env.adsr(0.005, 0.1, 0.0, 0.5, curve: -4), gate: gate, doneAction: 2);filterEnv = EnvGen.ar(Env.adsr(0.001, 0.2, 0.5, 0.5, curve: -4), gate: gate);sig = Saw.ar(freq);sig = RLPF.ar(sig, cutoff * filterEnv.linlin(0, 1, 0.1, 1), rq);sig = sig * amp * env;Out.ar(out, Pan2.ar(sig, pan));}"
+}
