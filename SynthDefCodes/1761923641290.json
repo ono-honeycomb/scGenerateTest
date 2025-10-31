@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedPulseFilter",
+  "discription": "A warm pulse wave synth featuring two slightly detuned oscillators for a richer sound and a resonant low-pass filter with a subtle random movement applied to its cutoff frequency, all shaped by an ADSR envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, detune=1.007, rq=0.5, cutoffBase=3000, cutoffRange=2000;var sig, env, filterCutoff;env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4),gate: gate,doneAction: 2);sig = Pulse.ar(freq, pulseWidth) + Pulse.ar(freq * detune, pulseWidth);filterCutoff = cutoffBase + (LFNoise0.kr(8).range(-1, 1) * cutoffRange * env);filterCutoff = filterCutoff.clip(200, 15000);sig = RLPF.ar(sig, filterCutoff, rq);sig = sig * amp * env;Out.ar(out, sig ! 2);}"
+}
