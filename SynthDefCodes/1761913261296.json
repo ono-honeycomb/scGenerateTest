@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SawPad",
+  "discription": "複数のデチューンされたのこぎり波と長いADSRエンベロープ、ローパスフィルターを使った温かいパッドサウンド。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, attack=2.0, decay=2.0, sustain=0.7, release=3.0, rq=0.5, cutoff=4000; var sig, env; var numVoices = 3; var detune = 0.005; var voiceFreqs = Array.fill(numVoices, { |i| freq * (1 + (i - (numVoices-1)/2) * detune) }); env = EnvGen.ar(Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2); sig = Mix.ar(voiceFreqs.collect { |f| Saw.ar(f) }); sig = RLPF.ar(sig, cutoff, rq); sig = sig * amp * env; Out.ar(out, Pan2.ar(sig, pan)); }"
+}
