@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsarPad",
+  "discription": "A spacious, evolving pad sound using a pulse wave, a resonant low-pass filter, and a subtle chorus effect, designed for ambient textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.5, cutoff=1000, cutoffModDepth=2000, vibratoRate=5, vibratoDepth=2;    var sig, env, lfo, filterEnv;    env = EnvGen.ar(        Env.adsr(0.5, 3.0, 0.7, 5.0, curve: -4),        gate: gate,        doneAction: 2    );    // LFO for subtle vibrato    lfo = SinOsc.kr(vibratoRate).range(1 - vibratoDepth.reciprocal, 1 + vibratoDepth.reciprocal);    // Filter envelope for dynamic cutoff    filterEnv = EnvGen.ar(Env.adsr(1.0, 2.0, 0.5, 4.0), gate: gate);    var currentCutoff = cutoff + (cutoffModDepth * filterEnv);    sig = Pulse.ar(freq * lfo, 0.5); // Pulse wave with vibrato    sig = RLPF.ar(sig, currentCutoff.max(50), rq); // Resonant Low Pass Filter    // Basic chorus effect for widening    sig = LeakDC.ar(CombN.ar(sig, 0.02, 0.01, 2) + sig);    sig = sig * amp * env;    Out.ar(out, sig ! 2);}"
+}
