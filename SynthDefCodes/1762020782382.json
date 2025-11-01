@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FilteredSawPluck",
+  "discription": "A bright, percussive pluck sound using a saw wave filtered by a resonant low-pass filter, with a quick decay envelope, suitable for arpeggios and rhythmic parts.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=8000, rq=0.5; var sig; var env = EnvGen.ar(Env.perc(0.01, 0.5), gate: gate, doneAction: 2); sig = Saw.ar(freq); sig = RLPF.ar(sig, cutoff, rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
