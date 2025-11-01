@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PadSynth",
+  "discription": "複数のデチューンされたのこぎり波オシレーターと緩やかなエンベロープ、そしてゆっくりと掃引されるローパスフィルターによって作られた、豊かなパッドサウンドです。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, pan=0.0; var sig, env; env = EnvGen.ar( Env.adsr(2.0, 1.0, 0.8, 3.0, curve: -4), gate: gate, doneAction: 2 ); var osc1 = Saw.ar(freq); var osc2 = Saw.ar(freq * (1 + detune)); var osc3 = Saw.ar(freq * (1 - detune)); sig = (osc1 + osc2 + osc3) / 3; sig = LPF.ar(sig, SinOsc.kr(0.1).range(freq, freq * 4), 0.1); sig = sig * amp * env; Out.ar(out, Pan2.ar(sig, pan) ! 2); }"
+}
