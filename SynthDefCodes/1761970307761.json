@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "GentleBell",
+  "discription": "A soft, bell-like tone created by combining harmonically related sine waves with a fast attack and slow decay envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.2, gate=1, decayTime=2.0;var sig;var env = EnvGen.ar(Env.linen(0.01, decayTime, 0.01),gate: gate,doneAction: 2);var fundamental = SinOsc.ar(freq);var fifth = SinOsc.ar(freq * 1.5);var octave = SinOsc.ar(freq * 2);var ninth = SinOsc.ar(freq * 2.25);sig = (fundamental * 0.7 + fifth * 0.5 + octave * 0.3 + ninth * 0.1) * amp * env;Out.ar(out, sig ! 2);}"
+}
