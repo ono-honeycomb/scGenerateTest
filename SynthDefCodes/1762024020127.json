@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "SoftPad",
+  "discription": "A soft, evolving pad sound created with detuned saw waves, a low-pass filter with subtle LFO modulation, and a long ADSR envelope for sustained, ambient textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=800, rq=0.5; var sig; var env = EnvGen.ar(Env.adsr(2.0, 3.0, 0.7, 5.0, curve: -4), gate: gate, doneAction: 2); sig = Saw.ar(freq * [0.99, 1.0, 1.01]) * 0.3; sig = LPF.ar(sig, cutoff + (LFO.tri(0.1, 1).linlin(-1, 1, 100, 500)), rq); sig = sig.sum * amp * env; Out.ar(out, sig ! 2); }"
+}
