@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckNoise",
+  "discription": "A plucked string-like sound using filtered noise and a quick decay envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.1, decayTime=0.3; var sig; var env = EnvGen.ar(Env.perc(0.001, decayTime), gate: gate, doneAction: 2); var noise = WhiteNoise.ar; sig = RLPF.ar(noise, freq, rq); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
