@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PadSynth",
+  "discription": "A warm, sustained pad sound using multiple detuned sine waves and a low-pass filter to create a rich, evolving texture.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, atk=2, rel=3, lpfFreq=4000, lpfRQ=0.5;var sig, env;env = EnvGen.ar(Env.adsr(atk, 0.5, 0.8, rel, curve: -4), gate: gate, doneAction: 2);sig = SinOsc.ar(freq) * 0.5;sig = sig + (SinOsc.ar(freq * 0.99) * 0.3);sig = sig + (SinOsc.ar(freq * 1.01) * 0.2);sig = LPF.ar(sig, lpfFreq, lpfRQ);sig = sig * amp * env;Out.ar(out, sig ! 2);}"
+}
