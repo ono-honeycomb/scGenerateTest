@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckyFMBell",
+  "discription": "FM synthesis generates a plucky, bell-like timbre with a quick envelope and a controllable brightness parameter.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, bright=0.5;var sig, env, carrierFreq, modulatorFreq, modDepth;env = EnvGen.ar(Env.adsr(0.005, 0.1, 0.6, 0.5, curve: -4),gate: gate,doneAction: 2);carrierFreq = freq;modulatorFreq = freq * 3.0;modDepth = bright * 100 * env;sig = SinOsc.ar(carrierFreq + (SinOsc.ar(modulatorFreq) * modDepth)) * amp * env;Out.ar(out, sig ! 2);}"
+}
