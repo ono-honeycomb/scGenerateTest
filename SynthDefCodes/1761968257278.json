@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMBell",
+  "discription": "A bright, metallic bell-like sound achieved through simple FM synthesis with a quick, percussive envelope. The FM index and ratio can be adjusted for different timbres.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, fmRatio=1.414, fmIndex=1.5; var sig, fmDepthEnv; var ampEnv = EnvGen.ar( Env.adsr(0.005, 0.1, 0.7, 0.5, curve: -4), gate: gate, doneAction: 2 ); fmDepthEnv = EnvGen.ar( Env.adsr(0.001, 0.08, 0.6, 0.3, curve: -4), gate: gate, doneAction: 0 ); sig = SinOsc.ar( freq + (SinOsc.ar(freq * fmRatio) * (freq * fmIndex * fmDepthEnv)) ) * amp * ampEnv; Out.ar(out, sig ! 2); }"
+}
