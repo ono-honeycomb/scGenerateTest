@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "WarmSawPad",
+  "discription": "なめらかなアタックとリリースを持つ、暖かみのあるノコギリ波のパッドサウンド。ローパスフィルターがエンベロープに応じて変化し、豊かな響きを生み出します。",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, sustainLevel=0.7, attackTime=0.8, decayTime=1.2, releaseTime=3.0, filterCutoff=1500, filterQ=0.5, filterEnvRange=2000; var sig, ampEnv, filterFreq; ampEnv = EnvGen.ar( Env.adsr(attackTime, decayTime, sustainLevel, releaseTime, curve: -4), gate: gate, doneAction: 2 ); sig = Saw.ar(freq); filterFreq = filterCutoff + (ampEnv * filterEnvRange); filterFreq = filterFreq.clip(50, 20000); sig = LPF.ar(sig, filterFreq, filterQ); sig = sig * amp * ampEnv; Out.ar(out, sig ! 2); }"
+}
