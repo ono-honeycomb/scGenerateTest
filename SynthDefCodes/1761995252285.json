@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PadSynth",
+  "discription": "A warm, evolving pad sound created by three slightly detuned sine waves, passed through a resonant low-pass filter whose cutoff frequency is modulated by a long ADSR envelope. Ideal for lush, atmospheric textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, attack=1.5, decay=0.5, sustain=0.7, release=2.0, filterCutoff=5000; var sig; var env = EnvGen.ar( Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2 ); var fundamental = SinOsc.ar(freq); var detuned1 = SinOsc.ar(freq * (1 + detune)); var detuned2 = SinOsc.ar(freq * (1 - detune * 0.5)); sig = (fundamental + detuned1 + detuned2) / 3; sig = RLPF.ar(sig, (filterCutoff * env.linlin(0, 1, 0.2, 1.0) + 50).clip(50, 18000), 0.5); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
