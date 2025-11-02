@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "ResoPulse",
+  "discription": "A resonant pulse wave synthesizer with separate ADSR envelopes for amplitude and filter cutoff.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pulseWidth=0.5, cutoff=2000, rq=0.5, atk=0.01, dec=0.1, sus=0.8, rel=1.0, filterAttack=0.01, filterDecay=0.2, filterSustain=0.5, filterRelease=0.5;    var sig;    var ampEnv = EnvGen.ar(        Env.adsr(atk, dec, sus, rel, curve: -4),        gate: gate,        doneAction: 2    );    var filterEnv = EnvGen.kr(        Env.adsr(filterAttack, filterDecay, filterSustain, filterRelease, curve: -4),        gate: gate,        doneAction: 0    );    var currentCutoff = (cutoff * filterEnv.sqrt) + (freq * 0.5);    currentCutoff = currentCutoff.clip(50, 20000);    sig = Pulse.ar(freq, pulseWidth);    sig = RLPF.ar(sig, currentCutoff, rq);    sig = sig * amp * ampEnv;    Out.ar(out, sig ! 2);}"
+}
