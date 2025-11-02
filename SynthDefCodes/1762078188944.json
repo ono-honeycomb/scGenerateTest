@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulseWidthModulation",
+  "discription": "A pulse wave synth with variable pulse width and ADSR envelope, featuring stereo panning.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, width=0.5, pan=0; var sig; var env = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); sig = LFPulse.ar(freq, 0, width); sig = sig * amp * env; Out.ar(out, Pan2.ar(sig, pan)); }"
+}
