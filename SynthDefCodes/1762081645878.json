@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMGlide",
+  "discription": "A shimmering FM bell-like tone with a gentle attack and a longer, resonant decay, suitable for melodic pads or percussive accents.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, modRatio=1.5, modIndex=1.0; var sig, env, carFreq, modFreq, modulator; env = EnvGen.ar(Env.adsr(0.05, 0.8, 0.0, 1.0, curve: -4), gate: gate, doneAction: 2); carFreq = freq; modFreq = freq * modRatio; modulator = SinOsc.ar(modFreq) * (modIndex * freq); sig = SinOsc.ar(carFreq + modulator) * amp * env; Out.ar(out, sig ! 2); }"
+}
