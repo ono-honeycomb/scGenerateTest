@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsePad",
+  "discription": "A warm, detuned pulse wave pad with a slow attack and release, filtered for a mellow tone.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, width=0.5, detune=1.005; var sig, env; env = EnvGen.ar(Env.adsr(2.0, 0.5, 0.7, 4.0, curve: -4), gate: gate, doneAction: 2); sig = Pulse.ar(freq * [1, detune], width); sig = LPF.ar(sig, freq * 4 + 1000) * amp * env; Out.ar(out, sig * 0.5 ! 2); }"
+}
