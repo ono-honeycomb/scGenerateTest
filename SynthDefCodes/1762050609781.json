@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMsynth",
+  "discription": "A simple FM synthesis patch with an ADSR envelope, allowing for timbral variation through ratio and index parameters.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, ratio=1.5, index=5; var car, mod, sig; var env = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); mod = SinOsc.ar(freq * ratio) * (freq * index); car = SinOsc.ar(freq + mod); sig = car * amp * env; Out.ar(out, sig ! 2); }"
+}
