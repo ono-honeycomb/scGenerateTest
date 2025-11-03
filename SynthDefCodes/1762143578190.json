@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMSynth",
+  "discription": "A classic FM (Frequency Modulation) synthesis with a sine wave carrier and a sine wave modulator, incorporating an ADSR envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, modFreqRatio=1.0, modIndex=1.0; var sig, env, mod; env = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); mod = SinOsc.ar(freq * modFreqRatio); sig = SinOsc.ar(freq + (mod * freq * modIndex * env)); Out.ar(out, sig * amp * env ! 2); }"
+}
