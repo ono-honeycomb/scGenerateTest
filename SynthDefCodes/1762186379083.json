@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "WarmPad",
+  "discription": "A warm, evolving pad sound using a filtered sawtooth wave with a slow attack and release, suitable for background textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoff=1200, rq=0.4; var sig; var env = EnvGen.ar(Env.adsr(2.0, 0.1, 0.7, 4.0, curve: -4), gate: gate, doneAction: 2); sig = Saw.ar(freq) * 0.7; sig = LPF.ar(sig, cutoff, rq); Out.ar(out, sig * amp * env ! 2); }"
+}
