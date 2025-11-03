@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSawFilter",
+  "discription": "Two slightly detuned saw waves are mixed, passed through a resonant low-pass filter, and shaped by an ADSR envelope for a warm, evolving pad or lead sound. The filter cutoff tracks the fundamental frequency, and resonance can be controlled.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, cutoffRatio=2.0, rq=0.5, pan=0;    var sig, env, filterFreq;    env = EnvGen.ar(        Env.adsr(0.01, 0.2, 0.7, 1.0, curve: -4),        gate: gate,        doneAction: 2    );    // Two detuned saw waves    sig = (Saw.ar(freq * 0.99) + Saw.ar(freq * 1.01)) * 0.5;    // Low-pass filter with cutoff tracking freq    filterFreq = freq * cutoffRatio;    sig = RLPF.ar(sig, filterFreq.max(400), rq); // Ensure minimum cutoff of 400Hz    sig = sig * amp * env;    Out.ar(out, Pan2.ar(sig, pan));}"
+}
