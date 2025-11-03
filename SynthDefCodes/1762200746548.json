@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMSynth",
+  "discription": "A simple Frequency Modulation (FM) synthesizer with ADSR envelope, allowing control over modulation index and modulator frequency multiplier.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, modIndex=5, modFreqMul=1; var sig, carrier, modulator; var env = EnvGen.ar( Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2 ); modulator = SinOsc.ar(freq * modFreqMul) * (freq * modIndex); carrier = SinOsc.ar(freq + modulator); sig = carrier * amp * env; Out.ar(out, sig ! 2); }"
+}
