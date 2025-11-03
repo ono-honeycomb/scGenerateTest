@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMBass",
+  "discription": "A punchy FM bass sound with a short decay envelope, suitable for percussive bass lines.",
+  "code": "{ arg out=0, freq=40, amp=0.2, gate=1, ratio=1.0, index=5; var sig, mod, env; env = EnvGen.ar(Env.adsr(0.001, 0.1, 0.7, 0.5, curve: -4), gate: gate, doneAction: 2); mod = SinOsc.ar(freq * ratio); sig = SinOsc.ar(freq + (mod * index)); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
