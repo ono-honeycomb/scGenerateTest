@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsarDrone",
+  "discription": "A spacious drone created with a pulse wave, slowly modulated pulse width, and a low-pass filter with an independent envelope.",
+  "code": "{ arg out=0, freq=80, amp=0.15, gate=1, filterCutoff=1500, rq=0.3;    var sig;    var mainEnv = EnvGen.ar(        Env.adsr(0.5, 2.0, 0.7, 3.0, curve: -4),        gate: gate,        doneAction: 2    );    var pulseWidthMod = LFSaw.kr(0.1).range(0.1, 0.9); // Slow LFO for pulse width modulation    sig = Pulse.ar(freq, pulseWidthMod);    var filterEnv = EnvGen.kr(        Env.adsr(0.1, 0.5, 0.5, 1.0),        gate: gate,        doneAction: 0 // Do not stop SynthDef when this envelope finishes    );    var cutoffFreq = LinExp.kr(filterEnv, 0, 1, 200, 8000); // Map envelope to a frequency range    sig = LPF.ar(sig, cutoffFreq, rq);    sig = sig * amp * mainEnv;    Out.ar(out, sig ! 2);}"
+}
