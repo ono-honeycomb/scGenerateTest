@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FmPluck",
+  "discription": "A bright FM pluck sound with an ADSR envelope, a dynamic modulation index, and a subtle vibrato.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, attack=0.01, decay=0.1, sustain=0.7, release=0.5, modRatio=1.5, modIndex=10.0, vibratoRate=5.0, vibratoDepth=2.0; var sig, env, modEnv, vibrato, modulator; env = EnvGen.ar( Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2 ); modEnv = EnvGen.ar( Env.adsr(attack, decay * 0.5, sustain * 0.5, release * 0.5, curve: -4), gate: gate ); vibrato = SinOsc.kr(vibratoRate) * vibratoDepth; modulator = SinOsc.ar( (freq + vibrato) * modRatio, 0, (freq + vibrato) * modIndex * modEnv ); sig = SinOsc.ar( freq + vibrato + modulator ) * amp * env; Out.ar(out, sig ! 2); }"
+}
