@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "BellSynth",
+  "discription": "A simple bell-like sound using multiple sine waves with a percussive envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1; var sig, env; env = EnvGen.ar(Env.perc(0.01, 1.5, curve: -4), gate: gate, doneAction: 2); sig = (SinOsc.ar(freq) * 0.7) + (SinOsc.ar(freq * 2.01) * 0.4) + (SinOsc.ar(freq * 3.0) * 0.2); Out.ar(out, sig * amp * env ! 2); }"
+}
