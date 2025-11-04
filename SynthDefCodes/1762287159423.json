@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedPulseLead",
+  "discription": "A classic detuned pulse wave lead or pad sound with a resonant low-pass filter and dynamic filter cutoff.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, pan=0, detune=0.005, pw=0.5, cutoff=5000, rq=0.5, atk=0.01, dec=0.2, sus=0.7, rel=1.0; var sig, env, filterEnv; env = EnvGen.ar( Env.adsr(atk, dec, sus, rel, curve: -4), gate: gate, doneAction: 2 ); filterEnv = EnvGen.ar( Env.adsr(atk * 0.5, dec * 0.8, 0.5, rel * 0.5, curve: -4), gate: gate ); var osc1 = Pulse.ar(freq, pw); var osc2 = Pulse.ar(freq * (1 + detune), pw); sig = (osc1 + osc2) * 0.5; var effectiveCutoff = cutoff + (filterEnv * (freq * 4)); effectiveCutoff = effectiveCutoff.clip(20, 20000); sig = RLPF.ar(sig, effectiveCutoff, rq); sig = sig * amp * env; Out.ar(out, Pan2.ar(sig, pan)); }"
+}
