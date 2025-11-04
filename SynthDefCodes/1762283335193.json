@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSawPad",
+  "discription": "A warm, detuned saw wave pad with an ADSR envelope, featuring two slightly detuned saw oscillators for a thicker sound. Ideal for lush pad and string-like textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, attack=0.5, decay=0.5, sustain=0.8, release=1.5; var sig; var env = EnvGen.ar(Env.adsr(attack, decay, sustain, release, curve: -4), gate: gate, doneAction: 2); var saw1 = Saw.ar(freq); var saw2 = Saw.ar(freq * (1 + detune)); sig = (saw1 + saw2) * 0.5; sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
