@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMSynthBell",
+  "discription": "A bell-like FM synthesis sound using a sine wave carrier and a sine wave modulator, with an ADSR envelope and a user-controllable modulation index for varying timbres.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, modRatio=1.4, modIndex=1.5;var sig, carrier, modulator, env;env = EnvGen.ar(Env.adsr(0.01, 0.2, 0.7, 1.5, curve: -4),gate: gate,doneAction: 2);modulator = SinOsc.ar(freq * modRatio);carrier = SinOsc.ar(freq + (modulator * freq * modIndex));sig = carrier * amp * env;Out.ar(out, sig ! 2);}"
+}
