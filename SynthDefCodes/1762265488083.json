@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSynth",
+  "discription": "A plucked string-like sound using a short noise burst fed into a filtered delay line, with an ADSR envelope for amplitude.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, decay=0.8, brightness=0.5;var sig, noiseBurst, delayTime;var env = EnvGen.ar(Env.adsr(0.001, 0.1, decay, 0.5, curve: -4), gate: gate, doneAction: 2);noiseBurst = WhiteNoise.ar(0.5) * EnvGen.ar(Env.perc(0.001, 0.05), gate: gate);delayTime = 1.0 / freq;sig = DelayN.ar(LPF.ar(noiseBurst, freq * (1 + (brightness * 2))), delayTime, delayTime);sig = RHPF.ar(sig, freq, 0.9);sig = sig * amp * env;Out.ar(out, sig ! 2);}"
+}
