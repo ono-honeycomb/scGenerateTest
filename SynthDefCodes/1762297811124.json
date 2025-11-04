@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "DetunedSawFilter",
+  "discription": "A detuned saw wave with a resonant low-pass filter whose cutoff frequency tracks the envelope and the fundamental frequency.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, rq=0.5, cutoff=5000;var sig, env, filterCutoff;env = EnvGen.ar(Env.adsr(0.01, 0.1, 0.8, 1.0, curve: -4), gate: gate, doneAction: 2);sig = Saw.ar(freq * (1 - detune)) + Saw.ar(freq * (1 + detune));filterCutoff = (cutoff * env.linlin(0, 1, 0.1, 1)) + (freq * 1.5);sig = RLPF.ar(sig, filterCutoff.clip(50, 20000), rq);sig = sig * amp * env * 0.5;Out.ar(out, sig ! 2);}"
+}
