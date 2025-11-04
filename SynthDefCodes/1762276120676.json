@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckSynth",
+  "discription": "A plucked, percussive synth sound with a band-pass filter sweep, reminiscent of a pizzicato string or a mallet instrument.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, rq=0.05, ffreq=2000, atk=0.01, dec=0.5; var sig, env, filterEnv, filteredSig; env = EnvGen.ar(Env.perc(atk, dec, curve: -4), gate: gate, doneAction: 2); filterEnv = EnvGen.kr(Env.adsr(0.01, 0.1, 0.5, 0.5, curve: -4), gate: gate); sig = Sawtooth.ar(freq); filteredSig = BPF.ar(sig, ffreq * filterEnv.linlin(0, 1, 0.1, 2), rq); Out.ar(out, (filteredSig * amp * env) ! 2); }"
+}
