@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PulsePad",
+  "discription": "A warm, evolving pulse wave pad with a resonant low-pass filter and ADSR envelope. It uses two slightly detuned pulse waves for richness and a slow LFO to modulate the filter cutoff for movement.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, detune=0.005, pulseWidth=0.5, rq=0.5, cutoff=2000, cutoffModDepth=1000, lfoRate=0.1;var sig, env, filterLFO;env = EnvGen.ar(Env.adsr(0.5, 1.0, 0.7, 2.0, curve: -4), gate: gate, doneAction: 2);filterLFO = SinOsc.kr(lfoRate).mul(cutoffModDepth).add(cutoff);sig = Pulse.ar(freq, pulseWidth) + Pulse.ar(freq * (1 + detune), pulseWidth);sig = sig * 0.5;sig = RLPF.ar(sig, filterLFO.max(50), rq);sig = sig * amp * env;Out.ar(out, sig ! 2);}"
+}
