@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "CloudySaw",
+  "discription": "Two slightly detuned saw waves creating a rich, evolving pad-like sound with a gentle resonant low-pass filter whose cutoff frequency sweeps with the envelope.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, atk=0.8, dec=0.8, sus=0.6, rel=3.0, detune=0.003, filterCutoffBase=1000, filterCutoffMax=8000, filterResonance=0.3; var sig, env, filterCutoffEnv; env = EnvGen.ar( Env.adsr(atk, dec, sus, rel, curve: -4), gate: gate, doneAction: 2 ); filterCutoffEnv = EnvGen.kr( Env.linen(atk * 0.5, sus + dec, rel * 2), gate: gate ); sig = Saw.ar(freq * (1 - detune)) + Saw.ar(freq * (1 + detune)); sig = RLPF.ar(sig, filterCutoffBase + (filterCutoffMax - filterCutoffBase) * filterCutoffEnv, filterResonance); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
