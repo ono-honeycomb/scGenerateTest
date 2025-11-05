@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "FMSynthPad",
+  "discription": "A soft FM synthesized pad sound with a long attack and release, suitable for ambient textures.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, modIndex=3, modFreqRatio=1.5; var sig, env; env = EnvGen.ar( Env.adsr(0.5, 0.5, 0.6, 3.0, curve: -4), gate: gate, doneAction: 2 ); sig = SinOsc.ar( freq: freq + (SinOsc.ar(freq * modFreqRatio) * (freq * modIndex)) ) * amp * env; Out.ar(out, sig ! 2); }"
+}
