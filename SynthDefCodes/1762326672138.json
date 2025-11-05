@@ -1,0 +1,5 @@
+{
+  "SynthDefName": "PluckySaw",
+  "discription": "A short, percussive synth sound using a sawtooth wave and a fast decaying envelope, often used for pizzicato strings or electronic plucks. It includes a low-pass filter whose cutoff is modulated by the envelope and a 'bright' parameter.",
+  "code": "{ arg out=0, freq=440, amp=0.1, gate=1, bright=0.5; var sig; var env = EnvGen.ar(Env.adsr(0.005, 0.1, 0.0, 0.1, curve: -4), gate: gate, doneAction: 2); sig = Saw.ar(freq); var filterCutoff = freq * (1 + (bright * 2)); filterCutoff = filterCutoff * env.linlin(0, 1, 0.5, 1.5).clip(0.5, 2.0); sig = LPF.ar(sig, filterCutoff.clip(20, 20000)); sig = sig * amp * env; Out.ar(out, sig ! 2); }"
+}
