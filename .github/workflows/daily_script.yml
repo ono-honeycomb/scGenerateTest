@@ -1,47 +1,47 @@
-name: Daily Node.js Script Execution and Commit
+# name: Daily Node.js Script Execution and Commit
 
-on:
-  schedule:
-    - cron: '0 * * * *'
-  workflow_dispatch:
+# on:
+#   schedule:
+#     - cron: '0 * * * *'
+#   workflow_dispatch:
 
-jobs:
-  run_and_commit:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write # リポジトリへの書き込み権限を許可
+# jobs:
+#   run_and_commit:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: write # リポジトリへの書き込み権限を許可
 
-    steps:
-      # 1. チェックアウト (★重要: プッシュ操作のために設定を変更)
-      - name: Checkout repository code
-        uses: actions/checkout@v4
-        with:
-          # `GITHUB_TOKEN`にコミット権限を与えるために必要
-          token: ${{ secrets.GITHUB_TOKEN }}
+#     steps:
+#       # 1. チェックアウト (★重要: プッシュ操作のために設定を変更)
+#       - name: Checkout repository code
+#         uses: actions/checkout@v4
+#         with:
+#           # `GITHUB_TOKEN`にコミット権限を与えるために必要
+#           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2. Node.js環境のセットアップ (省略)
-      - name: Set up Node.js 22.16.0
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.16.0'
+#       # 2. Node.js環境のセットアップ (省略)
+#       - name: Set up Node.js 22.16.0
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '22.16.0'
 
-      # 3. 依存関係のインストール (省略)
-      - name: Install dependencies
-        run: npm install
+#       # 3. 依存関係のインストール (省略)
+#       - name: Install dependencies
+#         run: npm install
 
-      # 4. jsの実行 (JSONファイルを生成)
-      - name: Run Node.js script and generate JSON
-        run: node generateSC.js
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+#       # 4. jsの実行 (JSONファイルを生成)
+#       - name: Run Node.js script and generate JSON
+#         run: node generateSC.js
+#         env:
+#           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
-      # 5. ★ 変更をコミットし、プッシュする
-      - name: Commit and Push new JSON file
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          # どのファイルをコミットするか指定
-          file_pattern: 'SynthDefCodes/*.json'
-          commit_message: 'feat(data): Add daily Gemini report (automated)'
-          # ワークフローを実行したユーザーとしてコミット
-          commit_user_name: 'github-actions[bot]'
-          commit_user_email: 'github-actions[bot]@users.noreply.github.com'
+#       # 5. ★ 変更をコミットし、プッシュする
+#       - name: Commit and Push new JSON file
+#         uses: stefanzweifel/git-auto-commit-action@v5
+#         with:
+#           # どのファイルをコミットするか指定
+#           file_pattern: 'SynthDefCodes/*.json'
+#           commit_message: 'feat(data): Add daily Gemini report (automated)'
+#           # ワークフローを実行したユーザーとしてコミット
+#           commit_user_name: 'github-actions[bot]'
+#           commit_user_email: 'github-actions[bot]@users.noreply.github.com'
